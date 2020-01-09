@@ -1,0 +1,33 @@
+*{
+	font-family: 'Roboto', sans-serif;
+}
+body{
+	background: url('/img/bgpage.png');
+	background-size: cover;
+	padding-bottom: 2em;
+}
+.content h2{
+	margin-bottom: 1.5em;
+}
+
+img{
+	width: 60em;
+}
+h1{
+	text-align: center;
+	font-size: 6em;
+	margin-top: 1em;
+	margin-bottom: .5em;
+}
+
+.carousel-inner p{
+	font-size: 1.1em;
+}
+.carousel-inner h2{
+	color: magenta;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.carousel-inner h2,p{
+	text-align: center;
+}
