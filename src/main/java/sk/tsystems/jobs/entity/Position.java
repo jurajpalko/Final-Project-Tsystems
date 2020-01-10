@@ -17,25 +17,27 @@ public class Position {
 	private String positionTitle;
 	private String jobDescription;
 	private String requirementDescription;
-	private Date publicationStartDay;
-	private Date applicationDeadline;
+//  zatial bez typu DATE. 	
+//	private Date publicationStartDay;
+//	private Date applicationDeadline;
 	//PositionSchedule
 	private String employmentType;
 	private String positionURI;
 	
 	
 	
-	public Position(int ident, String jobId, String positionTitle, String jobDescription, String requirementDescription,
-			Date publicationStartDay, Date applicationDeadline, String employmentType, String positionURI) {
+	public Position(String jobId, String positionTitle, String jobDescription, String requirementDescription,
+			// Date publicationStartDay, Date applicationDeadline,
+			String employmentType, String positionURI) {
 		
 		
-		this.ident = ident;
+// ident sa tu nepise lebo je @GeneratedValue		this.ident = ident;
 		this.jobId = jobId;
 		this.positionTitle = positionTitle;
 		this.jobDescription = jobDescription;
 		this.requirementDescription = requirementDescription;
-		this.publicationStartDay = publicationStartDay;
-		this.applicationDeadline = applicationDeadline;
+//		this.publicationStartDay = publicationStartDay;
+//		this.applicationDeadline = applicationDeadline;
 		this.employmentType = employmentType;
 		this.positionURI = positionURI;
 	}
