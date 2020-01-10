@@ -32,6 +32,12 @@ public class MainController {
 		return "index";
 	}
 	
+//	@RequestMapping("/")
+//	public String index() {
+//		
+//		return "position1";
+//	}
+	
 	
 	@Autowired
 	private PositionService positionService;
