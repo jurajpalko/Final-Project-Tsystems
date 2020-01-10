@@ -1,0 +1,24 @@
+*{
+	font-family: 'Roboto', sans-serif;
+}
+body{
+	background: url('/img/bgpage.png');
+	background-size: cover;
+	padding-bottom: 2em;
+}
+img{
+	width: 20em;
+
+}
+.box{
+	padding-left:3em;
+	
+	background: #b6b6b6;
+}
+.mt-4{
+	padding-left: 4em;
+}
+.container{
+	max-width:95%;
+	margin: auto;
+}
