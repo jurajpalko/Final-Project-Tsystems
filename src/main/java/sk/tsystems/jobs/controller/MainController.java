@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -53,6 +54,9 @@ public class MainController {
 			String requirementDescription = null;
 			String employmentType = null;
 			String positionURI = null;
+			String applicationDeadline = null;
+			String publicationStartDate = null;
+			
 			
 			JSONObject job = (JSONObject) allJobs.get(i);
 			JSONObject matchedObjectDescriptor = (JSONObject) job.get("MatchedObjectDescriptor");
@@ -61,15 +65,17 @@ public class MainController {
 			JSONObject userArea = (JSONObject) matchedObjectDescriptor.get("UserArea");
 			jobDescription = (String) userArea.get("TextJobDescription");
 			requirementDescription = (String) userArea.get("TextRequirementDescription");
+			publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
 			JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
 			if (positionSchedule.size() > 0) {
 				JSONObject positionScheduleFirstObject = (JSONObject) positionSchedule.get(0);
 				employmentType = (String) positionScheduleFirstObject.get("Name");
 			}
 			positionURI = (String) matchedObjectDescriptor.get("PositionURI");
+			applicationDeadline = (String) matchedObjectDescriptor.get("ApplicationDeadline");
 			
 			
-			Position p = new Position(jobId,positionTitle, jobDescription, requirementDescription, employmentType, positionURI);
+			Position p = new Position(jobId,positionTitle, jobDescription, requirementDescription, employmentType, positionURI, applicationDeadline, publicationStartDate );
 			positionService.addPosition(p);
 			
 		}
