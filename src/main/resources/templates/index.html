@@ -7,14 +7,94 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/positionList.css" />
     
 </head>
 
 <body>
+	<div class="container">
+	
+	
+	
+	
+		<div class="row">
+			<section class="col-6 screen-one">
+			
+			<div class="content">
+		
+			<img class="mt-2 logotsystems" src="/img/t-systemslogo.svg " alt="Logo T-Systems" />
+			<h1>Looking for a job ? </h1>
+			<h3>Everyone has an opportunity with us. More than 140 open jobs in Košice</h3>
+			</div>
+			
+			<div id="carouselControls" class="carousel slide" data-ride="carousel">
+			  <div class="carousel-inner">
+			    <div class="carousel-item active">
+			    
+			    <img src="/img/TechnicalPosition.png" class="d-block w-100" alt="Technical Position" />
+			    </div>
+			    <div class="carousel-item">
+			    <img src="/img/ProcessPosition.png" class="d-block w-100" alt="ProcessPosition" />
+			   
+			    </div>
+			    <div class="carousel-item">
+			     <img src="/img/ProjectPosition.png" class="d-block w-100" alt="ProjectPosition" />
+			      
+			    </div>
+			    <div class="carousel-item">
+			    	<img src="/img/Otherposition.png" class="d-block w-100" alt="OtherPosition" />
+			      
+			    </div>
+			  </div>
+			</div>
+			</section>
+			<img class="mt-4 smallLogo" src="/img/t-systemslogo.svg "
+			alt="Logo T-Systems" />
+			
+			<section class="col-6 screen-two">
+			<br /><br /><br />
+				<table class="table table-striped dark table-bordered">
+
+			<thead class="thead-dark">
+				<tr>
+					<th class="first">Job title</th>
+					<th>Position ID</th>
+					<th>Employment type</th>
+					<th>Posted</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="specialRow"
+					th:each="position : ${@mainController.positionList}">
+					<th class="first" th:text="${position.positionTitle}"></th>
+					<th><span th:text="${position.jobId}"></span></th>
+					<th><span th:text="${position.employmentType}"></span></th>
+
+					<th><span th:text="${position.publicationStartDate}"></span></th>
+
+				</tr>
+			</tbody>
+		</table>
+			</section>
+		</div>
+		
+		
+		<div class="row">
+			<section class="col-6 screen-three">
+			
+			
+			</section>
+			<section class="col-6 screen-four">
+			
+			
+			</section>
+		</div>
+		</div>
 	
 		
+		
 	
-	<div class="container">
+<!-- <div class="container">
 		
 		<div class="content">
 		
@@ -56,12 +136,11 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-	</div>
+	</div>  -->	
 	
+
 	
-	
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<div th:replace="/fragments/footer :: footer"/>
+		
 </body>
 </html>
