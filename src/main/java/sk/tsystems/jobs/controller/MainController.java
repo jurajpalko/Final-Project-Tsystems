@@ -132,4 +132,9 @@ public class MainController {
 		
 		return positionService.getPositionList();
 	}
+	
+	public Position getPosition() {
+		return positionService.getPosition(1);
+	}
+	
 }

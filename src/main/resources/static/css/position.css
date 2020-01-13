@@ -6,13 +6,16 @@ body{
 	background-size: cover;
 	padding-bottom: 2em;
 }
-th, td{
-	text-align: left;
-	padding: 1em;
-}
 h1,h3 {
 	color: #ED008C;
 }
 .card-header {
 	border-bottom: 1px solid #ED008C;
+}
+
+.title {
+	list-style: none;
+	text-align: center;
+	font-size: 2.5em;
+	color: #ED008C;
 }
