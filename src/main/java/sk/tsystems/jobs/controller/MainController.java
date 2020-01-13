@@ -1,11 +1,15 @@
 package sk.tsystems.jobs.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +25,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import sk.tsystems.jobs.entity.Position;
 import sk.tsystems.jobs.service.PositionService;
@@ -41,7 +51,13 @@ public class MainController {
 
 	@Scheduled(fixedRate = 100000)
 	public void update() throws IOException, ParseException {
-
+		
+		// DELETING CONTENT OF IMG/QRs FOLDER
+		Arrays.stream(new File("src/main/resources/static/img/QRs/").listFiles()).forEach(File::delete);
+		System.out.println("Images Deleted");
+		//
+		
+		
 		JSONObject jsonObject = null;
 
 		String jsonString = jsonPostRequest();
@@ -91,13 +107,43 @@ public class MainController {
 				Position p = new Position(jobId, positionTitle, jobDescription, requirementDescription, employmentType,
 						positionURI, applicationDeadline, publicationStartDate, positionBenefitname);
 				positionService.addPosition(p);
-
+				
+				// IDENT OF LAST ADDED POSITION
+				int ident = p.getIdent();
+				//
+				
+				
+				// SAVING QR CODE OF THE POSITION
+				 try {
+			            generateQRCodeImage(positionURI, 350, 350, "src/main/resources/static/img/QRs/"+ident+".png");
+			            System.out.println("qr "+ident+" saved ");
+			          
+			        } catch (WriterException e) {
+			            System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
+			        } catch (IOException e) {
+			            System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
+			        }
+				//
+				 
 			}
 
 		}
 
 	}
+	
+	//METHOD FOR GENERATING QR CODES
+	 private static void generateQRCodeImage(String text, int width, int height, String filePath)
+	            throws WriterException, IOException {
+	        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+	        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
 
+	        Path path = FileSystems.getDefault().getPath(filePath);
+	        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+
+	    }
+	
+	
+	
 	public String jsonPostRequest() throws IOException {
 
 		URL url = new URL("https://t-systems.jobs/globaljobboard_api/v3/search/");
