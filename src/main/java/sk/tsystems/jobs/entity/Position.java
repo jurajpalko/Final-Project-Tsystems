@@ -24,7 +24,7 @@ public class Position {
 	private String positionURI;
 	private String applicationDeadline;
 	private String publicationStartDate;
-	String positionBenefitname;
+	private String positionBenefitname;
 	
 	
 	
