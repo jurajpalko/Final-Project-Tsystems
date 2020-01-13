@@ -22,6 +22,14 @@ public class PositionServiceJPA implements PositionService {
 		entityManager.persist(position);
 
 	}
+	
+
+	public int deleteAllFromTable() {
+		return entityManager.createQuery("delete from Position").executeUpdate();
+
+	}
+	
+	
 
 	@Override
 	public Position getPosition(int ident) {
@@ -34,6 +42,10 @@ public class PositionServiceJPA implements PositionService {
 		}
 		return null;
 	}
+	
+	
+	
+	
 
 	@SuppressWarnings("unchecked")
 	@Override

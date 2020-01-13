@@ -18,74 +18,76 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 
-
 import sk.tsystems.jobs.entity.Position;
 import sk.tsystems.jobs.service.PositionService;
 
 @Controller
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class MainController {
-	
+
 	@RequestMapping("/")
 	public String index() {
-		
+
 		return "index";
 	}
-	
-	
+
 	@Autowired
 	private PositionService positionService;
-	
-	
+
 	@RequestMapping("/update")
 	public String update(Position position) throws IOException, ParseException {
-		
+
+		JSONObject jsonObject = null;
+
 		String jsonString = jsonPostRequest();
 		JSONParser parser = new JSONParser();
-		JSONObject jsonObject = (JSONObject) parser.parse(jsonString);
+		jsonObject = (JSONObject) parser.parse(jsonString);
 		JSONObject searchResult = (JSONObject) jsonObject.get("SearchResult");
 		Long numberOfJobs = (Long) searchResult.get("SearchResultCount");
 		JSONArray allJobs = (JSONArray) searchResult.get("SearchResultItems");
 
-		for(int i=0; i<numberOfJobs;i++) {
-			String jobId = null;
-			String positionTitle = null;
-			String jobDescription = null;
-			String requirementDescription = null;
-			String employmentType = null;
-			String positionURI = null;
-			String applicationDeadline = null;
-			String publicationStartDate = null;
-			
-			
-			JSONObject job = (JSONObject) allJobs.get(i);
-			JSONObject matchedObjectDescriptor = (JSONObject) job.get("MatchedObjectDescriptor");
-			jobId = (String) matchedObjectDescriptor.get("ID");
-			positionTitle = (String) matchedObjectDescriptor.get("PositionTitle");
-			JSONObject userArea = (JSONObject) matchedObjectDescriptor.get("UserArea");
-			jobDescription = (String) userArea.get("TextJobDescription");
-			requirementDescription = (String) userArea.get("TextRequirementDescription");
-			publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
-			JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
-			if (positionSchedule.size() > 0) {
-				JSONObject positionScheduleFirstObject = (JSONObject) positionSchedule.get(0);
-				employmentType = (String) positionScheduleFirstObject.get("Name");
+		if (jsonObject != null) {
+
+			int numberOfDeletedRows = positionService.deleteAllFromTable();
+
+			for (int i = 0; i < numberOfJobs; i++) {
+				String jobId = null;
+				String positionTitle = null;
+				String jobDescription = null;
+				String requirementDescription = null;
+				String employmentType = null;
+				String positionURI = null;
+				String applicationDeadline = null;
+				String publicationStartDate = null;
+
+				JSONObject job = (JSONObject) allJobs.get(i);
+				JSONObject matchedObjectDescriptor = (JSONObject) job.get("MatchedObjectDescriptor");
+				jobId = (String) matchedObjectDescriptor.get("ID");
+				positionTitle = (String) matchedObjectDescriptor.get("PositionTitle");
+				JSONObject userArea = (JSONObject) matchedObjectDescriptor.get("UserArea");
+				jobDescription = (String) userArea.get("TextJobDescription");
+				requirementDescription = (String) userArea.get("TextRequirementDescription");
+				publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
+				JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
+				if (positionSchedule.size() > 0) {
+					JSONObject positionScheduleFirstObject = (JSONObject) positionSchedule.get(0);
+					employmentType = (String) positionScheduleFirstObject.get("Name");
+				}
+				positionURI = (String) matchedObjectDescriptor.get("PositionURI");
+				applicationDeadline = (String) matchedObjectDescriptor.get("ApplicationDeadline");
+
+				Position p = new Position(jobId, positionTitle, jobDescription, requirementDescription, employmentType,
+						positionURI, applicationDeadline, publicationStartDate);
+				positionService.addPosition(p);
+
 			}
-			positionURI = (String) matchedObjectDescriptor.get("PositionURI");
-			applicationDeadline = (String) matchedObjectDescriptor.get("ApplicationDeadline");
-			
-			
-			Position p = new Position(jobId,positionTitle, jobDescription, requirementDescription, employmentType, positionURI, applicationDeadline, publicationStartDate );
-			positionService.addPosition(p);
-			
+
 		}
-		
-		
+
 		return "index";
 	}
-	
-	
-	public  String jsonPostRequest() throws IOException {
+
+	public String jsonPostRequest() throws IOException {
 
 		URL url = new URL("https://t-systems.jobs/globaljobboard_api/v3/search/");
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -110,5 +112,5 @@ public class MainController {
 			return response.toString();
 		}
 	}
-	
+
 }

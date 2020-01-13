@@ -10,4 +10,6 @@ public interface PositionService {
 	
 	Position getPosition(int ident);
 	List<Position> getAllPositions();
+
+	int deleteAllFromTable();
 }
