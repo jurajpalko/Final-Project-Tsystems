@@ -12,4 +12,7 @@ public interface PositionService {
 	List<Position> getAllPositions();
 
 	int deleteAllFromTable();
+	
+	
+	List<Position> getPositionList();
 }

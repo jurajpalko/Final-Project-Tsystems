@@ -12,79 +12,49 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="/css/style.css" />
 <link rel="stylesheet" href="/css/positionList.css" />
 
 </head>
 
 <body>
 
-	<img class="mt-4" src="/img/t-systemslogo.svg " alt="Logo T-Systems" />
+
+	<img class="mt-4 smallLogo" src="/img/t-systemslogo.svg "
+		alt="Logo T-Systems" />
+	<br>
 	<br>
 	<br>
 	<div class="container">
-		<table class="table table-striped" style="width: 100%">
-			<thead class="thead-light">
+		<table class="table table-striped dark table-bordered">
+
+			<thead class="thead-dark">
+
 				<tr>
 
-					<th>Job title</th>
+					<th class="first">Job title</th>
 					<th>Position ID</th>
-					<th>Deadline for Applications</th>
+					<th>Employment type</th>
 					<th>Posted</th>
 				</tr>
+
+
 			</thead>
 			<tbody>
-				<tr>
+				<tr class="specialRow"
+					th:each="position : ${@mainController.positionList}">
+					<th class="first" th:text="${position.positionTitle}"></th>
+					<th><span th:text="${position.jobId}"></span></th>
+					<th><span th:text="${position.employmentType}"></span></th>
 
-					<td class="job"><span>Senior Project Manager for
-							PaaS/BigData</span></td>
-					<td>141552</td>
-					<td><time datetime="2020-01-08">08.10.2020</time></td>
-					<td><time datetime="2020-01-07">07.01.2020</time></td>
-
-				</tr>
-
-				<tr>
-
-					<td class="job"><span>Backup/Storage Engineer for PC/PS</span></td>
-					<td>141552</td>
-					<td><time datetime="2020-01-08">08.10.2020</time></td>
-					<td><time datetime="2020-01-07">07.01.2020</time></td>
+					<th><span th:text="${position.publicationStartDate}"></span></th>
 
 				</tr>
-
-				<tr>
-
-					<td class="job"><span>Senior Project Manager for
-							PaaS/BigData</span></td>
-					<td>141552</td>
-					<td><time datetime="2020-01-08">08.10.2020</time></td>
-					<td><time datetime="2020-01-07">07.01.2020</time></td>
-
-				</tr>
-
-
-				<tr>
-
-					<td class="job"><span>Backup/Storage Engineer for PC/PS</span></td>
-					<td>141552</td>
-					<td><time datetime="2020-01-08">08.10.2020</time></td>
-					<td><time datetime="2020-01-07">07.01.2020</time></td>
-
-				</tr>
-
-				<tr>
-
-					<td class="job"><span>Senior Project Manager for
-							PaaS/BigData</span></td>
-					<td>141552</td>
-					<td><time datetime="2020-01-08">08.10.2020</time></td>
-					<td><time datetime="2020-01-07">07.01.2020</time></td>
-
-				</tr>
-
 			</tbody>
 		</table>
 	</div>
+
+
 
 
 

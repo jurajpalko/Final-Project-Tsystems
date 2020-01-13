@@ -1,14 +1,12 @@
-*{
-	font-family: 'Roboto', sans-serif;
-}
-body{
-	background: url('/img/bgpage.png');
-	background-size: cover;
-	padding-bottom: 2em;
-}
+
 img{
 	width: 20em;
 
+}
+
+.smallLogo{
+	position: absolute;
+	right:3em;
 }
 .box{
 	padding-left:3em;
@@ -17,8 +15,23 @@ img{
 }
 .mt-4{
 	padding-left: 4em;
+
+    margin: 3em;
 }
 .container{
 	max-width:95%;
 	margin: auto;
+	background-color: #dadada;
+}
+.specialRow{
+	background-color: #aeaeae;
+}
+.titleBox{
+	background-color: #aeaeae;
+}
+
+.first{
+	width: 40%;
+	font-size: 1.1em;
+	color:#ED008C;
 }

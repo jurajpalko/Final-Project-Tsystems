@@ -127,4 +127,9 @@ public class MainController {
 	public List<Position> getAll() {
 		return positionService.getAllPositions();
 	}
+	public List<Position> getPositionList(){
+		
+		
+		return positionService.getPositionList();
+	}
 }
