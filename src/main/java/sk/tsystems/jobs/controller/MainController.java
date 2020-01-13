@@ -14,7 +14,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
@@ -35,8 +38,9 @@ public class MainController {
 	@Autowired
 	private PositionService positionService;
 
-	@RequestMapping("/update")
-	public String update(Position position) throws IOException, ParseException {
+
+	@Scheduled(fixedRate = 100000)
+	public void update() throws IOException, ParseException {
 
 		JSONObject jsonObject = null;
 
@@ -61,7 +65,6 @@ public class MainController {
 				String applicationDeadline = null;
 				String publicationStartDate = null;
 				String positionBenefitname = null;
-				
 
 				JSONObject job = (JSONObject) allJobs.get(i);
 				JSONObject matchedObjectDescriptor = (JSONObject) job.get("MatchedObjectDescriptor");
@@ -81,7 +84,7 @@ public class MainController {
 					JSONObject positionBenefitFirstObject = (JSONObject) positionBenefit.get(0);
 					positionBenefitname = (String) positionBenefitFirstObject.get("Name");
 				}
-				
+
 				positionURI = (String) matchedObjectDescriptor.get("PositionURI");
 				applicationDeadline = (String) matchedObjectDescriptor.get("ApplicationDeadline");
 
@@ -93,7 +96,6 @@ public class MainController {
 
 		}
 
-		return "index";
 	}
 
 	public String jsonPostRequest() throws IOException {
@@ -121,8 +123,8 @@ public class MainController {
 			return response.toString();
 		}
 	}
-	
-	public List<Position> getAll(){
+
+	public List<Position> getAll() {
 		return positionService.getAllPositions();
 	}
 }
