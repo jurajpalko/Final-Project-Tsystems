@@ -26,7 +26,113 @@ public class Position {
 	private String publicationStartDate;
 	private String positionBenefitname;
 	
-	
+	public int getIdent() {
+		return ident;
+	}
+
+
+
+	public void setIdent(int ident) {
+		this.ident = ident;
+	}
+
+
+
+	public String getJobId() {
+		return jobId;
+	}
+
+
+
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
+	}
+
+
+
+	public String getPositionTitle() {
+		return positionTitle;
+	}
+
+
+
+	public void setPositionTitle(String positionTitle) {
+		this.positionTitle = positionTitle;
+	}
+
+
+
+	public String getJobDescription() {
+		return jobDescription;
+	}
+
+
+
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
+	}
+
+
+
+	public String getRequirementDescription() {
+		return requirementDescription;
+	}
+
+
+
+	public void setRequirementDescription(String requirementDescription) {
+		this.requirementDescription = requirementDescription;
+	}
+
+
+
+	public String getEmploymentType() {
+		return employmentType;
+	}
+
+
+
+	public void setEmploymentType(String employmentType) {
+		this.employmentType = employmentType;
+	}
+
+
+
+	public String getPositionURI() {
+		return positionURI;
+	}
+
+
+
+	public void setPositionURI(String positionURI) {
+		this.positionURI = positionURI;
+	}
+
+
+
+	public String getApplicationDeadline() {
+		return applicationDeadline;
+	}
+
+
+
+	public void setApplicationDeadline(String applicationDeadline) {
+		this.applicationDeadline = applicationDeadline;
+	}
+
+
+
+	public String getPublicationStartDate() {
+		return publicationStartDate;
+	}
+
+
+
+	public void setPublicationStartDate(String publicationStartDate) {
+		this.publicationStartDate = publicationStartDate;
+	}
+
+
 	
 	
 	public Position(String jobId, String positionTitle, String jobDescription, String requirementDescription,

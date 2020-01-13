@@ -10,34 +10,28 @@
     
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
 	<section class="col-12">
-	<div class="title"><h1>Position title</h1>
-		<table>
-			<tr><th>Job ID:</th>
-				<td>EA157</td>
-			</tr>
-			<tr><th>Date of release:</th>
-				<td>12/23/2019</td>
-			</tr>
-			<tr><th>Application deadline:</th>
-				<td>01/30/2020</td>
-			</tr>	
-			<tr><th>Employment type:</th>
-				<td>Full time - regular</td>
-			</tr>
-		</table>
+	<div class="title"><h1><strong>Position title</strong></h1>
+			<ul  th:each="position : ${@mainController.all}">
+				<li><strong>Job ID:</strong><span th:text="${position.jobId}"></span></li><br/>
+				<li><strong>Date of release:</strong><span th:text="${position.publicationStartDate}"></span></li><br/>
+			    <li><strong>Application deadline:</strong><span th:text="${position.applicationDeadline}"></span></li><br/>
+			    <li><strong>Employment type:</strong><span th:text="${position.employmentType}"></span></li><br/>
+			</ul>
 	</div>
 	</section>
 	</div>
 	</div>
-<div class="container">
-	<div class="row grid-divider">
+<div class="container-fluid">
+<div class="row">
 	<section class="col-6">
-		<h3><strong>Job description</strong></h3>
-		<h4><strong>Purpose</strong></h4>
-		<p>Accountable for order delivery, coordination of order management process, for  financial performance and billing tasks within the areas of the Service Ensurance.</p>
+		<div class="card text-white bg-dark mb-3">
+		<div class="card-header"><h3><strong>Job description</strong></h3></div>
+		<div class="card-body">
+		<h4 class="card-title"><strong>Purpose</strong></h4>
+		<p class="card-text">Accountable for order delivery, coordination of order management process, for  financial performance and billing tasks within the areas of the Service Ensurance.</p>
 		<h4><strong>Key accountabilities</strong></h4>
 		<h4>Service Ensurance pillar :</h4>
 		<ul>
@@ -74,12 +68,15 @@
 			<li>Meal vouchers contribution,</li>
 			<li>Rotations possibilities.</li>
 		</ul>
+		</div>
+		</div>
 	</section>
-
 	<section class="col-6">
-		<h3><strong>Job requirements</strong></h3>
-		<h4><strong>Requirements</strong></h4>
-		<h4>Education</h4>
+	<div class="card text-white bg-dark mb-3">
+		<div class="card-header"><h3><strong>Job requirements</strong></h3></div>
+		<div class="card-body">
+		<h4 class="card-title"><strong>Requirements</strong></h4>
+		<h4 class="card-text">Education</h4>
 		<ul>
 			<li>Master's degree - Information technologies</li>
 		</ul>
@@ -115,6 +112,8 @@
 		</ul>
 		<h4><strong>Salary</strong></h4>
 		<p>Minimum monthly salary is 930 € brutto + variable part of salary + other financial benefits. The final basic wage component can be adjusted accordingly to individual skills and experience of selected candidate. </p>
+	</div>
+	</div>
 	</section>
 	</div>
 		</div>

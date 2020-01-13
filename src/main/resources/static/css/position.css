@@ -13,10 +13,6 @@ th, td{
 h1,h3 {
 	color: #ED008C;
 }
-.grid-divider > [class*="col-"]:nth-child(n + 2):after {
-  content: "";
-  background-color: #ED008C;
-  position: absolute;
-  top: 0;
-  bottom: 0;
+.card-header {
+	border-bottom: 1px solid #ED008C;
 }

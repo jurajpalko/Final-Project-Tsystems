@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -120,5 +121,8 @@ public class MainController {
 			return response.toString();
 		}
 	}
-
+	
+	public List<Position> getAll(){
+		return positionService.getAllPositions();
+	}
 }
