@@ -24,12 +24,13 @@ public class Position {
 	private String positionURI;
 	private String applicationDeadline;
 	private String publicationStartDate;
+	String positionBenefitname;
 	
 	
 	
 	
 	public Position(String jobId, String positionTitle, String jobDescription, String requirementDescription,
-			String employmentType, String positionURI, String applicationDeadline, String publicationStartDate) {
+			String employmentType, String positionURI, String applicationDeadline, String publicationStartDate, String positionBenefitname ) {
 		
 
 		this.jobId = jobId;
@@ -40,6 +41,7 @@ public class Position {
 		this.positionURI = positionURI;
 		this.applicationDeadline = applicationDeadline;
 		this.publicationStartDate = publicationStartDate;
+		this.positionBenefitname = positionBenefitname;
 		
 	}
 
