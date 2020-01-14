@@ -48,26 +48,25 @@ public class MainController {
 	@Autowired
 	private PositionService positionService;
 
-
 	@Scheduled(fixedRate = 100000)
 	public void update() throws IOException, ParseException {
-		
-		// DELETING CONTENT OF IMG/QRs FOLDER
-		Arrays.stream(new File("src/main/resources/static/img/QRs/").listFiles()).forEach(File::delete);
-		System.out.println("Images Deleted");
-		//
-		
-		
+
 		JSONObject jsonObject = null;
 
 		String jsonString = jsonPostRequest();
 		JSONParser parser = new JSONParser();
 		jsonObject = (JSONObject) parser.parse(jsonString);
-		JSONObject searchResult = (JSONObject) jsonObject.get("SearchResult");
-		Long numberOfJobs = (Long) searchResult.get("SearchResultCount");
-		JSONArray allJobs = (JSONArray) searchResult.get("SearchResultItems");
 
 		if (jsonObject != null) {
+
+			JSONObject searchResult = (JSONObject) jsonObject.get("SearchResult");
+			Long numberOfJobs = (Long) searchResult.get("SearchResultCount");
+			JSONArray allJobs = (JSONArray) searchResult.get("SearchResultItems");
+
+			// DELETING CONTENT OF IMG/QRs FOLDER
+			Arrays.stream(new File("src/main/resources/static/img/QRs/").listFiles()).forEach(File::delete);
+			System.out.println("Images Deleted");
+			//
 
 			int numberOfDeletedRows = positionService.deleteAllFromTable();
 
@@ -107,43 +106,40 @@ public class MainController {
 				Position p = new Position(jobId, positionTitle, jobDescription, requirementDescription, employmentType,
 						positionURI, applicationDeadline, publicationStartDate, positionBenefitname);
 				positionService.addPosition(p);
-				
+
 				// IDENT OF LAST ADDED POSITION
 				int ident = p.getIdent();
 				//
-				
-				
+
 				// SAVING QR CODE OF THE POSITION
-				 try {
-			            generateQRCodeImage(positionURI, 350, 350, "src/main/resources/static/img/QRs/"+ident+".png");
-			            System.out.println("qr "+ident+" saved ");
-			          
-			        } catch (WriterException e) {
-			            System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
-			        } catch (IOException e) {
-			            System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
-			        }
+				try {
+					generateQRCodeImage(positionURI, 350, 350, "src/main/resources/static/img/QRs/" + ident + ".png");
+					System.out.println("qr " + ident + " saved ");
+
+				} catch (WriterException e) {
+					System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
+				} catch (IOException e) {
+					System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
+				}
 				//
-				 
+
 			}
 
 		}
 
 	}
-	
-	//METHOD FOR GENERATING QR CODES
-	 private static void generateQRCodeImage(String text, int width, int height, String filePath)
-	            throws WriterException, IOException {
-	        QRCodeWriter qrCodeWriter = new QRCodeWriter();
-	        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
 
-	        Path path = FileSystems.getDefault().getPath(filePath);
-	        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+	// METHOD FOR GENERATING QR CODES
+	private static void generateQRCodeImage(String text, int width, int height, String filePath)
+			throws WriterException, IOException {
+		QRCodeWriter qrCodeWriter = new QRCodeWriter();
+		BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
 
-	    }
-	
-	
-	
+		Path path = FileSystems.getDefault().getPath(filePath);
+		MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+
+	}
+
 	public String jsonPostRequest() throws IOException {
 
 		URL url = new URL("https://t-systems.jobs/globaljobboard_api/v3/search/");
@@ -173,14 +169,14 @@ public class MainController {
 	public List<Position> getAll() {
 		return positionService.getAllPositions();
 	}
-	public List<Position> getPositionList(){
-		
-		
+
+	public List<Position> getPositionList() {
+
 		return positionService.getPositionList();
 	}
-	
+
 	public Position getPosition() {
 		return positionService.getPosition(1);
 	}
-	
+
 }
