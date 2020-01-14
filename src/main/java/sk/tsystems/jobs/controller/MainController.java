@@ -52,6 +52,13 @@ public class MainController {
 
 		return "index";
 	}
+	
+	@RequestMapping("/update")
+	public String updateWeb() throws Exception {
+		update();
+		return "index";
+	}
+
 
 	@Autowired
 	private PositionService positionService;
