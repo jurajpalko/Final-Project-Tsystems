@@ -6,8 +6,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap&subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css"/>
-    <link rel="stylesheet" href="/css/positionList.css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/positionList.css}" />
     
 </head>
 
@@ -22,33 +22,34 @@
 			
 			<div class="content">
 		
-			<img class="mt-2 logotsystems" src="/img/t-systemslogo.svg " alt="Logo T-Systems" />
+			<img class="mt-2 logotsystems" th:src="@{/img/t-systemslogo.svg}" alt="Logo T-Systems" />
 			<h1>Looking for a job ? </h1>
-			<h3>Everyone has an opportunity with us. More than 140 open jobs in Košice</h3>
+			<h3>Everyone has an opportunity with us</h3>
 			</div>
-			
+			<div class="content">
 			<div id="carouselControls" class="carousel slide" data-ride="carousel">
 			  <div class="carousel-inner">
 			    <div class="carousel-item active">
 			    
-			    <img src="/img/TechnicalPosition.png" class="d-block w-100" alt="Technical Position" />
+			    <img th:src="@{/img/TechnicalPosition.png}" class="w-50" alt="Technical Position" />
 			    </div>
 			    <div class="carousel-item">
-			    <img src="/img/ProcessPosition.png" class="d-block w-100" alt="ProcessPosition" />
+			    <img th:src="@{/img/ProcessPosition.png}" class=" w-50" alt="ProcessPosition" />
 			   
 			    </div>
 			    <div class="carousel-item">
-			     <img src="/img/ProjectPosition.png" class="d-block w-100" alt="ProjectPosition" />
+			     <img th:src="@{/img/ProjectPosition.png}" class=" w-50" alt="ProjectPosition" />
 			      
 			    </div>
 			    <div class="carousel-item">
-			    	<img src="/img/Otherposition.png" class="d-block w-100" alt="OtherPosition" />
+			    	<img th:src="@{/img/Otherposition.png}" class=" w-50" alt="OtherPosition" />
 			      
 			    </div>
 			  </div>
 			</div>
+			</div>
 			</section>
-			<img class="mt-4 smallLogo" src="/img/t-systemslogo.svg "
+			<img class="mt-4 smallLogo" th:src="@{/img/t-systemslogo.svg}"
 			alt="Logo T-Systems" />
 			
 			<section class="col-6 screen-two">
@@ -78,20 +79,18 @@
 			</section>
 		</div>
 		
-		
 		<div class="row">
 			<section class="col-6 screen-three">
 				<div class="row">
-				
-						<ul class="col-6 offset-1" th:each="position : ${@mainController.all}">
-							<li class="title"><strong><span th:text="${position.positionTitle}"></span></strong></li>
-							<li><strong>Job ID:</strong><span th:text="${position.jobId}"></span></li>
-							<li><strong>Date of release:</strong><span th:text="${position.publicationStartDate}"></span></li>
-						    <li><strong>Application deadline:</strong><span th:text="${position.applicationDeadline}"></span></li>
-						    <li><strong>Employment type:</strong><span th:text="${position.employmentType}"></span></li>
+						<ul class="col-6  list-group" th:each="position : ${@mainController.all}">
+							<li class="title list-group-item"><strong><span th:text="${position.positionTitle}"></span></strong></li>
+							<li class="list-group-item"><strong>Job ID:</strong><span th:text="${position.jobId}"></span></li>
+							<li class="list-group-item"><strong>Date of release:</strong><span th:text="${position.publicationStartDate}"></span></li>
+						    <li class="list-group-item"><strong>Application deadline:</strong><span th:text="${position.applicationDeadline}"></span></li>
+						    <li class="list-group-item"><strong>Employment type:</strong><span th:text="${position.employmentType}"></span></li>
 						</ul>
 						
-						<img class="img-thumbnail" src="/img/QRs/4009.png" alt="QRCode" />
+						<img class="img-thumbnail img-responsive qrcode" th:src="@{/img/QRs/4009.png}" alt="QRCode" />
 				</div>
 			
 			
@@ -116,10 +115,10 @@
 			
 			</section>
 		</div>
+<div th:replace="/fragments/footer :: footer"/>
 		</div>
 	
 		
-<div th:replace="/fragments/footer :: footer"/>
 		
 </body>
 </html>

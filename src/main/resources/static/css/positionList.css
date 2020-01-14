@@ -1,16 +1,15 @@
 
 img{
-	width: 20em;
+	width: 15em;
 
 }
 
 .smallLogo{
-	position: absolute;
-	right:3em;
+	position: fixed;
+	right:0em;
 }
 .box{
 	padding-left:3em;
-	
 	background: #b6b6b6;
 }
 .mt-4{
@@ -18,11 +17,7 @@ img{
 
     margin: 3em;
 }
-.container{
-	max-width:95%;
-	margin: auto;
-	background-color: #dadada;
-}
+
 .specialRow{
 	background-color: #aeaeae;
 }
@@ -32,6 +27,12 @@ img{
 
 .first{
 	width: 40%;
-	font-size: 1.1em;
+	font-size: 0.8em;
 	color:#ED008C;
 }
+
+th{
+	font-size: 0.8em;
+}
+
+

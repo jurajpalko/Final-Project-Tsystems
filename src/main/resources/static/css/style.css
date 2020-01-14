@@ -32,4 +32,23 @@ h1{
 .col-6{
 	padding: 0.2em;
 }
+.card-body > p:nth-child(11){
+	display: none;
+}
+.qrcode{
+	width: 10em;
+    height: 9.5em;
+}
 
+.container-fluid{
+	height: 1080px;
+}
+.w-50{
+	width: 40% !important;
+	position: relative;
+    left: 23em;
+}
+.content{
+	margin: 0 auto;
+	
+}

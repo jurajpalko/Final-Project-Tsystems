@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -39,6 +41,12 @@ import sk.tsystems.jobs.service.PositionService;
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class MainController {
 
+	
+	@Autowired
+	private ServletContext servletContext;
+	
+	
+	
 	@RequestMapping("/")
 	public String index() {
 
@@ -83,7 +91,7 @@ public class MainController {
 
 				JSONObject job = (JSONObject) allJobs.get(i);
 				JSONObject matchedObjectDescriptor = (JSONObject) job.get("MatchedObjectDescriptor");
-				jobId = (String) matchedObjectDescriptor.get("ID");
+				jobId = (String) matchedObjectDescriptor.get("PositionID");
 				positionTitle = (String) matchedObjectDescriptor.get("PositionTitle");
 				JSONObject userArea = (JSONObject) matchedObjectDescriptor.get("UserArea");
 				jobDescription = (String) userArea.get("TextJobDescription");
