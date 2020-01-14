@@ -95,6 +95,11 @@ public class MainController {
 				positionTitle = (String) matchedObjectDescriptor.get("PositionTitle");
 				JSONObject userArea = (JSONObject) matchedObjectDescriptor.get("UserArea");
 				jobDescription = (String) userArea.get("TextJobDescription");
+				
+				jobDescription = deleteAllFrom(jobDescription, "Salary");
+				jobDescription = deleteAllFrom(jobDescription, "Requirements");
+				jobDescription = deleteAllFrom(jobDescription, "Other Benefits");
+				
 				requirementDescription = (String) userArea.get("TextRequirementDescription");
 				publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
 				JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
@@ -137,6 +142,22 @@ public class MainController {
 
 	}
 
+	
+	private static String deleteAllFrom(String jobDescription, String subString) {
+		int positionOfSubstring = jobDescription.indexOf(subString);
+		if (positionOfSubstring != -1) {
+			jobDescription = jobDescription.substring(0, positionOfSubstring);
+			int positionOfpstrong = jobDescription.lastIndexOf("<p><strong>");
+			if (positionOfpstrong != -1) {
+				jobDescription = jobDescription.substring(0, positionOfpstrong);
+			}
+		}
+		return jobDescription;
+	}
+	
+	
+	
+	
 	// METHOD FOR GENERATING QR CODES
 	private static void generateQRCodeImage(String text, int width, int height, String filePath)
 			throws WriterException, IOException {
