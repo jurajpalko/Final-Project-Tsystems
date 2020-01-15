@@ -64,7 +64,7 @@ public class MainController {
 	@RequestMapping("/update")
 	public String updateWeb() throws Exception {
 		update();
-		return "index";
+		return "positionList";
 	}
 
 

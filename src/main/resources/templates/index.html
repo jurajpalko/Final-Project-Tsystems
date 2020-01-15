@@ -1,54 +1,67 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Home page</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap&subset=latin-ext" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" th:href="@{/css/positionList.css}" />
-    
+<title>Home page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap&subset=latin-ext"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/positionList.css}" />
+
 </head>
 
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<section class="col-6 screen-one">
-			
-			<div class="content">
-		
-			<img class="mt-2 logotsystems w-50" th:src="@{/img/t-systemslogo.svg}" alt="Logo T-Systems" />
-			<h1 class="text-white text-center">Looking for a job ? </h1>
-			<h4  class="text-white text-center">Everyone has an opportunity with us</h4>
-			
-			</div>
-			<div class="content">
-			<div id="carouselControls" class="carousel slide" data-ride="carousel">
-			  <div class="carousel-inner">
-			    <div class="carousel-item active">
-			    
-			    <img th:src="@{/img/TechnicalPosition.png}" class="w-100" alt="Technical Position" />
-			    </div>
-			    <div class="carousel-item">
-			    <img th:src="@{/img/ProcessPosition.png}" class=" w-100" alt="ProcessPosition" />
-			   
-			    </div>
-			    <div class="carousel-item">
-			     <img th:src="@{/img/ProjectPosition.png}" class=" w-100" alt="ProjectPosition" />
-			      
-			    </div>
-			    <div class="carousel-item">
-			    	<img th:src="@{/img/Otherposition.png}" class=" w-100" alt="OtherPosition" />
-			      
-			    </div>
-			  </div>
-			</div>
-			</div>
+
+				<div class="content">
+
+					<img class="mt-2 logotsystems w-50"
+						th:src="@{/img/t-systemslogo.svg}" alt="Logo T-Systems" />
+					<h1 class="text-white text-center">Looking for a job ?</h1>
+					<h4 class="text-white text-center">Everyone has an opportunity
+						with us</h4>
+
+				</div>
+				<div class="content">
+					<div id="carouselControls" class="carousel slide"
+						data-ride="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+
+								<img th:src="@{/img/TechnicalPosition.png}" class="w-100"
+									alt="Technical Position" />
+							</div>
+							<div class="carousel-item">
+								<img th:src="@{/img/ProcessPosition.png}" class=" w-100"
+									alt="ProcessPosition" />
+
+							</div>
+							<div class="carousel-item">
+								<img th:src="@{/img/ProjectPosition.png}" class=" w-100"
+									alt="ProjectPosition" />
+
+							</div>
+							<div class="carousel-item">
+								<img th:src="@{/img/Otherposition.png}" class=" w-100"
+									alt="OtherPosition" />
+
+							</div>
+						</div>
+					</div>
+				</div>
 			</section>
 			<img class="mt-4 smallLogo" th:src="@{/img/t-systemslogo.svg}"
-			alt="Logo T-Systems" />
-			
+				alt="Logo T-Systems" />
+
 			<section class="col-6 screen-two">
 				<table class="table table-striped  table-bordered">
 					<thead class="thead-dark">
@@ -59,60 +72,101 @@
 							<th>Posted</th>
 						</tr>
 					</thead>
-			<tbody>
-				<tr class="specialRow"
-					th:each="position : ${@mainController.positionList}">
-					<th class="first" th:text="${position.positionTitle}"></th>
-					<th><span th:text="${position.jobId}"></span></th>
-					<th><span th:text="${position.employmentType}"></span></th>
-					<th><span th:text="${position.publicationStartDate}"></span></th>
-				</tr>
-			</tbody>
-		</table>
+					<tbody>
+						<tr class="positionRow"
+							th:each="position : ${@mainController.positionList}">
+							<th class="first" th:text="${position.positionTitle}"></th>
+							<th><span th:text="${position.jobId}"></span></th>
+							<th><span th:text="${position.employmentType}"></span></th>
+							<th><span th:text="${position.publicationStartDate}"></span></th>
+						</tr>
+					</tbody>
+				</table>
 			</section>
 		</div>
-</div>
-<div class="container-fluid">
+	</div>
+	<div class="container-fluid">
 		<div class="row">
 			<section class="col-6 screen-three">
 				<div class="container-fluid">
-				<div class="row">
-					<ul class="col-6" th:each="position : ${@mainController.all}">
-							<li class="title"><strong><span th:text="${position.positionTitle}"></span></strong></li>
-						</ul>	
+					<div class="row">
+						<ul class="col-6" th:each="position : ${@mainController.all}">
+							<li class="title"><strong><span
+									th:text="${position.positionTitle}"></span></strong></li>
+						</ul>
 						<!--  <img class="img-thumbnail img-responsive qrcode" th:src="@{/img/QRs/6109.png}" alt="QRCode" />-->
-						
-				</div>
-			
-			
-			
-				<div class="row select-jobdescription">
-					<div class="card text-white mb-3 col-6">
-						<div class="card-header"><h3><strong>Job description</strong></h3></div>
-						<div class="card-body" th:each="position : ${@mainController.all}">
-							<p class="card-text"><span th:utext="${position.jobDescription}"></span></p>  
+
+					</div>
+
+
+
+					<div class="row select-jobdescription">
+						<div class="card text-white mb-3 col-6">
+							<div class="card-header">
+								<h3>
+									<strong>Job description</strong>
+								</h3>
+							</div>
+							<div class="card-body"
+								th:each="position : ${@mainController.all}">
+								<p class="card-text">
+									<span th:utext="${position.jobDescription}"></span>
+								</p>
+							</div>
 						</div>
-					</div>	
-					 <div class="card text-white mb-3 col-6">
-						<div class="card-header"><h3><strong>Job requirements</strong></h3></div>
-							<div class="card-body select-requirements" th:each="position : ${@mainController.all}">
-							<p class="card-text"><span th:utext="${position.requirementDescription}"></span></p>
-						</div> 
+						<div class="card text-white mb-3 col-6">
+							<div class="card-header">
+								<h3>
+									<strong>Job requirements</strong>
+								</h3>
+							</div>
+							<div class="card-body select-requirements"
+								th:each="position : ${@mainController.all}">
+								<p class="card-text">
+									<span th:utext="${position.requirementDescription}"></span>
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
-				</div>
 			</section>
-			
-			<section class="col-6 screen-four">
-			
-			
-			</section>
+
+			<section class="col-6 screen-four"></section>
 		</div>
-		</div>
-<div th:replace="/fragments/footer :: footer"/>
-		
-	
-		
-		
+	</div>
+	<div th:replace="/fragments/footer :: footer" />
+
+
+	<script>
+		var slideIndex = 9;
+
+		var slides = document.getElementsByClassName("positionRow");
+
+		for (i = 10; i < slides.length; i++) {
+			slides[i].style.display = "none";
+		}
+
+		showSlides();
+
+		function showSlides() {
+
+			slideIndex++;
+
+			if (slideIndex > slides.length) {
+				slideIndex = 1
+			}
+
+			slides[slideIndex - 1].style.display = "block";
+
+			if (slideIndex < 10) {
+				slides[slides.length - slideIndex - 10].style.display = "none";
+			} else {
+				slides[slideIndex - 10].style.display = "none";
+			}
+
+			setTimeout(showSlides, 5000);
+		}
+	</script>
+
 </body>
 </html>
