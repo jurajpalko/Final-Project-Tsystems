@@ -2,19 +2,25 @@ package sk.tsystems.jobs.controller;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -22,10 +28,12 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.MediaType;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.google.zxing.BarcodeFormat;
@@ -63,6 +71,8 @@ public class MainController {
 	@Autowired
 	private PositionService positionService;
 
+	private static final String QR_FOLDER = System.getProperty("java.io.tmpdir");
+	
 	@Scheduled(fixedRate = 10000000)
 	public void update() throws IOException, ParseException {
 
@@ -80,10 +90,11 @@ public class MainController {
 
 			// DELETING CONTENT OF IMG/QRs FOLDER
 			//Arrays.stream(new File("src/main/resources/static/img/QRs/").listFiles()).forEach(File::delete);
-			System.out.println("Images Deleted");
+			//System.out.println("Images Deleted");
 			//
 
 			int numberOfDeletedRows = positionService.deleteAllFromTable();
+			clearSavedData(numberOfDeletedRows);
 			int ident = 1;
 
 			for (int i = 0; i < numberOfJobs; i++) {
@@ -137,8 +148,8 @@ public class MainController {
 
 				// SAVING QR CODE OF THE POSITION
 				try {
-					generateQRCodeImage(positionURI, 350, 350, "src/main/resources/static/img/QRs/" + ident + ".png");
-					System.out.println("qr " + ident + " saved ");
+					generateQRCodeImage(positionURI, 350, 350,  QR_FOLDER +ident + ".png");
+					System.err.println(QR_FOLDER + ident + ".png" + " saved ");
 
 				} catch (WriterException e) {
 					System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
@@ -158,9 +169,9 @@ public class MainController {
 		String subStringUpperCase = subString.toUpperCase();
 		String jobDescriptionUpperCase = jobDescription.toUpperCase();
 		
-		System.out.println("------------------------------------------------------------");
-		System.out.println(jobDescriptionUpperCase);
-		System.out.println("------------------------------------------------------------");
+//		System.out.println("------------------------------------------------------------");
+//		System.out.println(jobDescriptionUpperCase);
+//		System.out.println("------------------------------------------------------------");
 		
 		int positionOfSubstring = jobDescriptionUpperCase.indexOf(subStringUpperCase);
 		if (positionOfSubstring != -1) {
@@ -173,7 +184,21 @@ public class MainController {
 		return jobDescription;
 	}
 	
-	
+	private void clearSavedData(int deleted) {
+		Path path = FileSystems.getDefault().getPath(QR_FOLDER+"1"+".png");
+		if(Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
+			try {
+				for (int index = 1; index<=deleted;index++) {
+					Path file = FileSystems.getDefault().getPath(QR_FOLDER + index+".png");
+					Files.delete(file);
+					System.err.println(QR_FOLDER + index+".png"+ " DELETED");
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	
 	// METHOD FOR GENERATING QR CODES
@@ -225,5 +250,14 @@ public class MainController {
 	public Position getPosition() {
 		return positionService.getPosition(1);
 	}
-
+	
+	@RequestMapping(value = "/qrcode", method = RequestMethod.GET)
+	public void getQrCode(HttpServletResponse response, int number) throws IOException{
+		if (number>0&&number<=getAll().size() ) {
+			InputStream in = new FileInputStream(QR_FOLDER + number+ ".png");
+			response.setContentType(MediaType.IMAGE_PNG_VALUE);
+			OutputStream os = response.getOutputStream();
+			IOUtils.copy(in, os);
+		}
+	}
 }
