@@ -106,6 +106,9 @@ public class MainController {
 				jobDescription = deleteAllFrom(jobDescription, "Salary");
 				jobDescription = deleteAllFrom(jobDescription, "Requirements");
 				jobDescription = deleteAllFrom(jobDescription, "Other Benefits");
+				jobDescription = deleteAllFrom(jobDescription, "Experiences/Skills");
+				jobDescription = deleteAllFrom(jobDescription, "Your skills");
+				jobDescription = deleteAllFrom(jobDescription, "Benefits of working with us:");
 				
 				requirementDescription = (String) userArea.get("TextRequirementDescription");
 				publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");

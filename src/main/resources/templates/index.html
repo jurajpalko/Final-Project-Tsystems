@@ -78,13 +78,9 @@
 				<div class="container-fluid">
 				<div class="row">
 					<ul class="col-6" th:each="position : ${@mainController.all}">
-							<li ><strong><span th:text="${position.positionTitle}"></span></strong></li>
-							<li><strong>Job ID:</strong><span th:text="${position.jobId}"></span></li>
-							<li><strong>Date of release:</strong><span th:text="${position.publicationStartDate}"></span></li>
-						    <li><strong>Application deadline:</strong><span th:text="${position.applicationDeadline}"></span></li>
-						    <li><strong>Employment type:</strong><span th:text="${position.employmentType}"></span></li>
+							<li class="title"><strong><span th:text="${position.positionTitle}"></span></strong></li>
 						</ul>	
-						<img class="img-thumbnail img-responsive qrcode" th:src="@{/img/QRs/6109.png}" alt="QRCode" />
+						<!--  <img class="img-thumbnail img-responsive qrcode" th:src="@{/img/QRs/6109.png}" alt="QRCode" />-->
 						
 				</div>
 			
@@ -97,9 +93,9 @@
 							<p class="card-text"><span th:utext="${position.jobDescription}"></span></p>  
 						</div>
 					</div>	
-					 <div class="card text-white mb-3 col-6 select-requirements">
+					 <div class="card text-white mb-3 col-6">
 						<div class="card-header"><h3><strong>Job requirements</strong></h3></div>
-							<div class="card-body select" th:each="position : ${@mainController.all}">
+							<div class="card-body select-requirements" th:each="position : ${@mainController.all}">
 							<p class="card-text"><span th:utext="${position.requirementDescription}"></span></p>
 						</div> 
 					</div>
