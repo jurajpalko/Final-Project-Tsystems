@@ -79,7 +79,7 @@ public class MainController {
 			JSONArray allJobs = (JSONArray) searchResult.get("SearchResultItems");
 
 			// DELETING CONTENT OF IMG/QRs FOLDER
-			Arrays.stream(new File("src/main/resources/static/img/QRs/").listFiles()).forEach(File::delete);
+			//Arrays.stream(new File("src/main/resources/static/img/QRs/").listFiles()).forEach(File::delete);
 			System.out.println("Images Deleted");
 			//
 
