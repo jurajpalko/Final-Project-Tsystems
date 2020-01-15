@@ -84,6 +84,7 @@ public class MainController {
 			//
 
 			int numberOfDeletedRows = positionService.deleteAllFromTable();
+			int ident = 1;
 
 			for (int i = 0; i < numberOfJobs; i++) {
 				String jobId = null;
@@ -126,12 +127,12 @@ public class MainController {
 				positionURI = "https://t-systems.jobs/global-careers-en" + (String) matchedObjectDescriptor.get("PositionURI");
 				applicationDeadline = (String) matchedObjectDescriptor.get("ApplicationDeadline");
 
-				Position p = new Position(jobId, positionTitle, jobDescription, requirementDescription, employmentType,
+				Position p = new Position(ident, jobId, positionTitle, jobDescription, requirementDescription, employmentType,
 						positionURI, applicationDeadline, publicationStartDate, positionBenefitname);
 				positionService.addPosition(p);
 
 				// IDENT OF LAST ADDED POSITION
-				int ident = p.getIdent();
+				// int ident = p.getIdent();
 				//
 
 				// SAVING QR CODE OF THE POSITION
@@ -144,7 +145,7 @@ public class MainController {
 				} catch (IOException e) {
 					System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
 				}
-				//
+				ident ++;
 
 			}
 

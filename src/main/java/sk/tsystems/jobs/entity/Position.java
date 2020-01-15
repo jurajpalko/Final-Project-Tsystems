@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class Position {
 
 	@Id
-	@GeneratedValue
+//	@GeneratedValue
 	private int ident;
 	
 	private String jobId; 
@@ -135,10 +135,10 @@ public class Position {
 
 	
 	
-	public Position(String jobId, String positionTitle, String jobDescription, String requirementDescription,
+	public Position(int ident, String jobId, String positionTitle, String jobDescription, String requirementDescription,
 			String employmentType, String positionURI, String applicationDeadline, String publicationStartDate, String positionBenefitname ) {
 		
-
+		this.ident = ident;
 		this.jobId = jobId;
 		this.positionTitle = positionTitle;
 		this.jobDescription = jobDescription;
