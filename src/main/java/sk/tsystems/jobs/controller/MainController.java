@@ -63,7 +63,7 @@ public class MainController {
 	@Autowired
 	private PositionService positionService;
 
-	@Scheduled(fixedRate = 100000)
+	@Scheduled(fixedRate = 10000000)
 	public void update() throws IOException, ParseException {
 
 		JSONObject jsonObject = null;
@@ -151,7 +151,14 @@ public class MainController {
 
 	
 	private static String deleteAllFrom(String jobDescription, String subString) {
-		int positionOfSubstring = jobDescription.indexOf(subString);
+		String subStringUpperCase = subString.toUpperCase();
+		String jobDescriptionUpperCase = jobDescription.toUpperCase();
+		
+		System.out.println("------------------------------------------------------------");
+		System.out.println(jobDescriptionUpperCase);
+		System.out.println("------------------------------------------------------------");
+		
+		int positionOfSubstring = jobDescriptionUpperCase.indexOf(subStringUpperCase);
 		if (positionOfSubstring != -1) {
 			jobDescription = jobDescription.substring(0, positionOfSubstring);
 			int positionOfpstrong = jobDescription.lastIndexOf("<p><strong>");
