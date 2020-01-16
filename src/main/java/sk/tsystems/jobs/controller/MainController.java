@@ -50,32 +50,28 @@ import sk.tsystems.jobs.service.PositionService;
 @Scope(WebApplicationContext.SCOPE_SESSION)
 public class MainController {
 
-	
 	@Autowired
 	private ServletContext servletContext;
-	
-	
-	
+
 	@RequestMapping("/")
 	public String index() {
 
 		return "index";
 	}
-	
+
 	@RequestMapping("/update")
 	public String updateWeb() throws Exception {
 		update();
-		return "positionList";
+		return "index";
 	}
-
 
 	@Autowired
 	private PositionService positionService;
 
 	private static final String QR_FOLDER = System.getProperty("java.io.tmpdir");
-	
+
 	private List<String> qrCodes = new ArrayList<>();
-	
+
 	@Scheduled(fixedRate = 10000000)
 	public void update() throws IOException, ParseException {
 
@@ -92,8 +88,9 @@ public class MainController {
 			JSONArray allJobs = (JSONArray) searchResult.get("SearchResultItems");
 
 			// DELETING CONTENT OF IMG/QRs FOLDER
-			//Arrays.stream(new File("src/main/resources/static/img/QRs/").listFiles()).forEach(File::delete);
-			//System.out.println("Images Deleted");
+			// Arrays.stream(new
+			// File("src/main/resources/static/img/QRs/").listFiles()).forEach(File::delete);
+			// System.out.println("Images Deleted");
 			//
 
 			int numberOfDeletedRows = positionService.deleteAllFromTable();
@@ -111,7 +108,6 @@ public class MainController {
 				String publicationStartDate = null;
 				String positionBenefitname = null;
 				String salary = null;
-				
 
 				JSONObject job = (JSONObject) allJobs.get(i);
 				JSONObject matchedObjectDescriptor = (JSONObject) job.get("MatchedObjectDescriptor");
@@ -119,104 +115,111 @@ public class MainController {
 				positionTitle = (String) matchedObjectDescriptor.get("PositionTitle");
 				JSONObject userArea = (JSONObject) matchedObjectDescriptor.get("UserArea");
 				jobDescription = (String) userArea.get("TextJobDescription");
-				
-				salary = selectAllFrom(jobDescription, "Salary");
-				salary =  deleteAllFrom(salary, "<p>We expect from you");
-				
-				System.out.println("-------------------------------------------");
-				System.out.println(salary);
-				System.out.println("-------------------------------------------");
-				
-				
-				jobDescription = deleteAllFrom(jobDescription, "Salary");
-				jobDescription = deleteAllFrom(jobDescription, "Requirements");
-				jobDescription = deleteAllFrom(jobDescription, "Other Benefits");
-				jobDescription = deleteAllFrom(jobDescription, "Experiences/Skills");
-				jobDescription = deleteAllFrom(jobDescription, "Your skills");
-				jobDescription = deleteAllFrom(jobDescription, "Benefits of working with us:");
-				
-				requirementDescription = (String) userArea.get("TextRequirementDescription");
-				publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
-				JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
-				if (positionSchedule.size() > 0) {
-					JSONObject positionScheduleFirstObject = (JSONObject) positionSchedule.get(0);
-					employmentType = (String) positionScheduleFirstObject.get("Name");
+
+				if (jobDescription != null) {
+
+					salary = selectAllFrom(jobDescription, "Salary");
+					if (salary != null) {
+						salary = deleteAllFrom(salary, "<p>We expect from you");
+					}
+
+					System.out.println("-------------------------------------------");
+					System.out.println(salary);
+					System.out.println("-------------------------------------------");
+
+					jobDescription = deleteAllFrom(jobDescription, "Salary");
+					jobDescription = deleteAllFrom(jobDescription, "Requirements");
+					jobDescription = deleteAllFrom(jobDescription, "Other Benefits");
+					jobDescription = deleteAllFrom(jobDescription, "Experiences/Skills");
+					jobDescription = deleteAllFrom(jobDescription, "Your skills");
+					jobDescription = deleteAllFrom(jobDescription, "Benefits of working with us:");
+
+					requirementDescription = (String) userArea.get("TextRequirementDescription");
+					publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
+					JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
+					if (positionSchedule.size() > 0) {
+						JSONObject positionScheduleFirstObject = (JSONObject) positionSchedule.get(0);
+						employmentType = (String) positionScheduleFirstObject.get("Name");
+					}
+					JSONArray positionBenefit = (JSONArray) matchedObjectDescriptor.get("PositionBenefit");
+					if (positionBenefit.size() > 0) {
+						JSONObject positionBenefitFirstObject = (JSONObject) positionBenefit.get(0);
+						positionBenefitname = (String) positionBenefitFirstObject.get("Name");
+					}
+
+					positionURI = "https://t-systems.jobs/global-careers-en"
+							+ (String) matchedObjectDescriptor.get("PositionURI");
+					applicationDeadline = (String) matchedObjectDescriptor.get("ApplicationDeadline");
+
+					Position p = new Position(ident, jobId, positionTitle, jobDescription, requirementDescription,
+							employmentType, positionURI, applicationDeadline, publicationStartDate, positionBenefitname,
+							salary);
+					positionService.addPosition(p);
+
+					// IDENT OF LAST ADDED POSITION
+					// int ident = p.getIdent();
+					//
+
+					// SAVING QR CODE OF THE POSITION
+					try {
+						generateQRCodeImage(positionURI, 350, 350, QR_FOLDER + ident + ".png");
+						System.err.println(QR_FOLDER + ident + ".png" + " saved ");
+
+					} catch (WriterException e) {
+						System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
+					} catch (IOException e) {
+						System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
+					}
+					qrCodes.add(
+							"<div class='qrcode'><img class='qr-code-image' src='/" + servletContext.getContextPath()
+									+ "qrcode?number=" + ident + "' alt='Qr code image.'/></div>");
+					ident++;
+
 				}
-				JSONArray positionBenefit = (JSONArray) matchedObjectDescriptor.get("PositionBenefit");
-				if (positionBenefit.size() > 0) {
-					JSONObject positionBenefitFirstObject = (JSONObject) positionBenefit.get(0);
-					positionBenefitname = (String) positionBenefitFirstObject.get("Name");
-				}
-
-				positionURI = "https://t-systems.jobs/global-careers-en" + (String) matchedObjectDescriptor.get("PositionURI");
-				applicationDeadline = (String) matchedObjectDescriptor.get("ApplicationDeadline");
-
-				Position p = new Position(ident, jobId, positionTitle, jobDescription, requirementDescription, employmentType,
-						positionURI, applicationDeadline, publicationStartDate, positionBenefitname, salary);
-				positionService.addPosition(p);
-
-				// IDENT OF LAST ADDED POSITION
-				// int ident = p.getIdent();
-				//
-
-				// SAVING QR CODE OF THE POSITION
-				try {
-					generateQRCodeImage(positionURI, 350, 350,  QR_FOLDER +ident + ".png");
-					System.err.println(QR_FOLDER + ident + ".png" + " saved ");
-
-				} catch (WriterException e) {
-					System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
-				} catch (IOException e) {
-					System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
-				}
-				qrCodes.add("<div class='qrcode'><img class='qr-code-image' src='/" + servletContext.getContextPath() + "qrcode?number=" + ident
-						+ "' alt='Qr code image.'/></div>");
-				ident ++;
-
 			}
 
 		}
 
 	}
 
-	
-	private static String deleteAllFrom(String jobDescription, String subString) {
+	private static String deleteAllFrom(String mainString, String subString) {
 		String subStringUpperCase = subString.toUpperCase();
-		String jobDescriptionUpperCase = jobDescription.toUpperCase();
-		int positionOfSubstring = jobDescriptionUpperCase.indexOf(subStringUpperCase);
-		if (positionOfSubstring != -1) {
-			jobDescription = jobDescription.substring(0, positionOfSubstring);
-			int positionOfpstrong = jobDescription.lastIndexOf("<p><strong>");
-			if (positionOfpstrong != -1) {
-				jobDescription = jobDescription.substring(0, positionOfpstrong);
+		if (mainString != null) {
+			String jobDescriptionUpperCase = mainString.toUpperCase();
+			int positionOfSubstring = jobDescriptionUpperCase.indexOf(subStringUpperCase);
+			if (positionOfSubstring != -1) {
+				mainString = mainString.substring(0, positionOfSubstring);
+				int positionOfpstrong = mainString.lastIndexOf("<p><strong>");
+				if (positionOfpstrong != -1) {
+					mainString = mainString.substring(0, positionOfpstrong);
+				}
 			}
 		}
-		return jobDescription;
+		return mainString;
 	}
-	
-	private static String selectAllFrom(String jobDescription, String subString) {
-		
+
+	private static String selectAllFrom(String mainString, String subString) {
+
 		String subStringUpperCase = subString.toUpperCase();
-		String jobDescriptionUpperCase = jobDescription.toUpperCase();
+		String jobDescriptionUpperCase = mainString.toUpperCase();
 		int positionOfSubstring = jobDescriptionUpperCase.indexOf(subStringUpperCase);
 		if (positionOfSubstring != -1) {
-		subString = jobDescription.substring(positionOfSubstring);
-		subString = "<p><strong>" + subString;
-		return  subString;
+			subString = mainString.substring(positionOfSubstring);
+			subString = "<p><strong>" + subString;
+			return subString;
 		}
-		
-		return  null;
+
+		return null;
 	}
-	
-	
+
 	private void clearSavedData(int deleted) {
-		Path path = FileSystems.getDefault().getPath(QR_FOLDER+"1"+".png");
-		if(Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
+		Path path = FileSystems.getDefault().getPath(QR_FOLDER + "1" + ".png");
+		if (Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
 			try {
-				for (int index = 1; index<=deleted;index++) {
-					Path file = FileSystems.getDefault().getPath(QR_FOLDER + index+".png");
+				for (int index = 1; index <= deleted; index++) {
+					Path file = FileSystems.getDefault().getPath(QR_FOLDER + index + ".png");
 					Files.delete(file);
-					System.err.println(QR_FOLDER + index+".png"+ " DELETED");
+					System.err.println(QR_FOLDER + index + ".png" + " DELETED");
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -225,8 +228,7 @@ public class MainController {
 		}
 		qrCodes.clear();
 	}
-	
-	
+
 	// METHOD FOR GENERATING QR CODES
 	private static void generateQRCodeImage(String text, int width, int height, String filePath)
 			throws WriterException, IOException {
@@ -267,10 +269,11 @@ public class MainController {
 	public List<Position> getAll() {
 		return positionService.getAllPositions();
 	}
+
 	public List<String> getQrCodes() {
 		return qrCodes;
 	}
-	
+
 	public List<Position> getPositionList() {
 
 		return positionService.getPositionList();
@@ -279,11 +282,11 @@ public class MainController {
 	public Position getPosition() {
 		return positionService.getPosition(1);
 	}
-	
+
 	@RequestMapping(value = "/qrcode", method = RequestMethod.GET)
-	public void getQrCode(HttpServletResponse response, int number) throws IOException{
-		if (number>0&&number<=getAll().size() ) {
-			InputStream in = new FileInputStream(QR_FOLDER + number+ ".png");
+	public void getQrCode(HttpServletResponse response, int number) throws IOException {
+		if (number > 0 && number <= getAll().size()) {
+			InputStream in = new FileInputStream(QR_FOLDER + number + ".png");
 			response.setContentType(MediaType.IMAGE_PNG_VALUE);
 			OutputStream os = response.getOutputStream();
 			IOUtils.copy(in, os);
