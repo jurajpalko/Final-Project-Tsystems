@@ -6,7 +6,7 @@ body{
 	background: url('../img/woodbg.jpg');
 	background-size: cover;
 	outline: 1px solid white;
-	height: 1080px;
+	height: 1200px;
 }
 .content h3{
 	margin-bottom: 1.5em;
@@ -50,7 +50,7 @@ h1{
 	margin: 0 auto;
 }
 .card{
-	background: transparent;
+	background: rgba(0,0,0,0.5);
 	border: 1px solid #e20074;
 }
 .card-header {
@@ -80,7 +80,10 @@ p,li{
 	font-size: 1.5em;
 }
 
-
+aside{
+	background: black;
+	padding:0.2em;
+}
 
 
 

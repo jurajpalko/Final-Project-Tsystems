@@ -1,47 +1,8 @@
-/*
-img{
-	width: 15em;
-
-}
-
-.smallLogo{
-	position: fixed;
-	right:0em;
-}
-.box{
-	padding-left:3em;
-	background: #b6b6b6;
-}
-.mt-4{
-	padding-left: 4em;
-
-    margin: 3em;
-}
-
-.specialRow{
-	background-color: #aeaeae;
-}
-.titleBox{
-	background-color: #aeaeae;
-}
-
-.first{
-	width: 40%;
-	font-size: 0.8em;
-	color:#ED008C;
-}
-
-th{
-	font-size: 0.8em;
-}
-*/
-
 
 img{
 	width: 15em;
 
 }
-
 .smallLogo{
 	position: absolute;
 	right:0;
@@ -65,17 +26,17 @@ img{
 
 .first{
 	width: 40%;
-	font-size: 1em;
+	font-size: 0.6em;
 	color:#ED008C;
 }
 
 th{
-	font-size: 1em;
+	font-size: 0.5em;
 	color: white;
 	background: black;
 }
 .table td, .table th{
-	padding: 1em;
+	padding: 1.5em;
 }
 
 .table .thead-dark th,.table-bordered td, .table-bordered th {
