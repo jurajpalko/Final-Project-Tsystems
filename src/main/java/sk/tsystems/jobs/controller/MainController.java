@@ -84,7 +84,11 @@ public class MainController {
 		if (jsonObject != null) {
 
 			JSONObject searchResult = (JSONObject) jsonObject.get("SearchResult");
+			
+			
 			Long numberOfJobs = (Long) searchResult.get("SearchResultCount");
+			
+			
 			JSONArray allJobs = (JSONArray) searchResult.get("SearchResultItems");
 
 			// DELETING CONTENT OF IMG/QRs FOLDER
@@ -118,15 +122,6 @@ public class MainController {
 
 				if (jobDescription != null) {
 
-					salary = selectAllFrom(jobDescription, "Salary");
-					if (salary != null) {
-						salary = deleteAllFrom(salary, "<p>We expect from you");
-					}
-
-					System.out.println("-------------------------------------------");
-					System.out.println(salary);
-					System.out.println("-------------------------------------------");
-
 					jobDescription = deleteAllFrom(jobDescription, "Salary");
 					jobDescription = deleteAllFrom(jobDescription, "Requirements");
 					jobDescription = deleteAllFrom(jobDescription, "Other Benefits");
@@ -135,6 +130,12 @@ public class MainController {
 					jobDescription = deleteAllFrom(jobDescription, "Benefits of working with us:");
 
 					requirementDescription = (String) userArea.get("TextRequirementDescription");
+
+					salary = selectAllFrom(requirementDescription, "Salary");
+					if (salary != null) {
+						salary = deleteAllFrom(salary, "<p>We expect from you");
+					}
+
 					publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
 					JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
 					if (positionSchedule.size() > 0) {
@@ -185,8 +186,8 @@ public class MainController {
 	private static String deleteAllFrom(String mainString, String subString) {
 		String subStringUpperCase = subString.toUpperCase();
 		if (mainString != null) {
-			String jobDescriptionUpperCase = mainString.toUpperCase();
-			int positionOfSubstring = jobDescriptionUpperCase.indexOf(subStringUpperCase);
+			String mainStringUpperCase = mainString.toUpperCase();
+			int positionOfSubstring = mainStringUpperCase.indexOf(subStringUpperCase);
 			if (positionOfSubstring != -1) {
 				mainString = mainString.substring(0, positionOfSubstring);
 				int positionOfpstrong = mainString.lastIndexOf("<p><strong>");
@@ -201,12 +202,14 @@ public class MainController {
 	private static String selectAllFrom(String mainString, String subString) {
 
 		String subStringUpperCase = subString.toUpperCase();
-		String jobDescriptionUpperCase = mainString.toUpperCase();
-		int positionOfSubstring = jobDescriptionUpperCase.indexOf(subStringUpperCase);
-		if (positionOfSubstring != -1) {
-			subString = mainString.substring(positionOfSubstring);
-			subString = "<p><strong>" + subString;
-			return subString;
+		if (mainString != null) {
+			String mainStringUpperCase = mainString.toUpperCase();
+			int positionOfSubstring = mainStringUpperCase.indexOf(subStringUpperCase);
+			if (positionOfSubstring != -1) {
+				subString = mainString.substring(positionOfSubstring);
+				subString = "<p><strong>" + subString;
+				return subString;
+			}
 		}
 
 		return null;
