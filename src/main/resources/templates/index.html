@@ -156,15 +156,16 @@
 				slideIndex = 1
 			}
 
-			slides[slideIndex - 1].style.display = "block";
+			slides[slideIndex - 1].style.display = "table-row";
 
 			if (slideIndex < 10) {
 				slides[slides.length - slideIndex - 10].style.display = "none";
+				console.log("ide tento if");
 			} else {
 				slides[slideIndex - 10].style.display = "none";
 			}
 
-			setTimeout(showSlides, 5000);
+			setTimeout(showSlides, 1500);
 		}
 	</script>
 

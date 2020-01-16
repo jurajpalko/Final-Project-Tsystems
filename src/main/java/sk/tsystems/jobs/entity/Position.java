@@ -25,7 +25,21 @@ public class Position {
 	private String applicationDeadline;
 	private String publicationStartDate;
 	private String positionBenefitname;
+	@Column(length = 10000)
+	private String salary;
 	
+	public String getSalary() {
+		return salary;
+	}
+
+
+
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+
+
+
 	public int getIdent() {
 		return ident;
 	}
@@ -136,7 +150,7 @@ public class Position {
 	
 	
 	public Position(int ident, String jobId, String positionTitle, String jobDescription, String requirementDescription,
-			String employmentType, String positionURI, String applicationDeadline, String publicationStartDate, String positionBenefitname ) {
+			String employmentType, String positionURI, String applicationDeadline, String publicationStartDate, String positionBenefitname, String salary ) {
 		
 		this.ident = ident;
 		this.jobId = jobId;
@@ -148,6 +162,7 @@ public class Position {
 		this.applicationDeadline = applicationDeadline;
 		this.publicationStartDate = publicationStartDate;
 		this.positionBenefitname = positionBenefitname;
+		this.salary = salary;
 		
 	}
 

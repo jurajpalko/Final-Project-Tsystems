@@ -107,6 +107,8 @@ public class MainController {
 				String applicationDeadline = null;
 				String publicationStartDate = null;
 				String positionBenefitname = null;
+				String salary = null;
+				
 
 				JSONObject job = (JSONObject) allJobs.get(i);
 				JSONObject matchedObjectDescriptor = (JSONObject) job.get("MatchedObjectDescriptor");
@@ -114,6 +116,14 @@ public class MainController {
 				positionTitle = (String) matchedObjectDescriptor.get("PositionTitle");
 				JSONObject userArea = (JSONObject) matchedObjectDescriptor.get("UserArea");
 				jobDescription = (String) userArea.get("TextJobDescription");
+				
+				salary = selectAllFrom(jobDescription, "Salary");
+				salary =  deleteAllFrom(salary, "<p>We expect from you");
+				
+				System.out.println("-------------------------------------------");
+				System.out.println(salary);
+				System.out.println("-------------------------------------------");
+				
 				
 				jobDescription = deleteAllFrom(jobDescription, "Salary");
 				jobDescription = deleteAllFrom(jobDescription, "Requirements");
@@ -139,7 +149,7 @@ public class MainController {
 				applicationDeadline = (String) matchedObjectDescriptor.get("ApplicationDeadline");
 
 				Position p = new Position(ident, jobId, positionTitle, jobDescription, requirementDescription, employmentType,
-						positionURI, applicationDeadline, publicationStartDate, positionBenefitname);
+						positionURI, applicationDeadline, publicationStartDate, positionBenefitname, salary);
 				positionService.addPosition(p);
 
 				// IDENT OF LAST ADDED POSITION
@@ -168,11 +178,6 @@ public class MainController {
 	private static String deleteAllFrom(String jobDescription, String subString) {
 		String subStringUpperCase = subString.toUpperCase();
 		String jobDescriptionUpperCase = jobDescription.toUpperCase();
-		
-//		System.out.println("------------------------------------------------------------");
-//		System.out.println(jobDescriptionUpperCase);
-//		System.out.println("------------------------------------------------------------");
-		
 		int positionOfSubstring = jobDescriptionUpperCase.indexOf(subStringUpperCase);
 		if (positionOfSubstring != -1) {
 			jobDescription = jobDescription.substring(0, positionOfSubstring);
@@ -183,6 +188,21 @@ public class MainController {
 		}
 		return jobDescription;
 	}
+	
+	private static String selectAllFrom(String jobDescription, String subString) {
+		
+		String subStringUpperCase = subString.toUpperCase();
+		String jobDescriptionUpperCase = jobDescription.toUpperCase();
+		int positionOfSubstring = jobDescriptionUpperCase.indexOf(subStringUpperCase);
+		if (positionOfSubstring != -1) {
+		subString = jobDescription.substring(positionOfSubstring);
+		subString = "<p><strong>" + subString;
+		return  subString;
+		}
+		
+		return  null;
+	}
+	
 	
 	private void clearSavedData(int deleted) {
 		Path path = FileSystems.getDefault().getPath(QR_FOLDER+"1"+".png");
