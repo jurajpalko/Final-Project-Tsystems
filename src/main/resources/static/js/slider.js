@@ -37,7 +37,7 @@ function showSlides() {
 		slides[slideIndex - 6].style.display = "none";
 	}
 
-	setTimeout(showSlides, delayInMilliseconds);
+	setTimeout(showSlides, 1000);
 }
 
 
