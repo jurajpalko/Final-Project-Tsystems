@@ -5,7 +5,7 @@
 body{
 	background: url('../img/woodbg.jpg');
 	background-size: cover;
-	outline: 1px solid white;
+	/*outline: 1px solid white;*/
 	height: 1200px;
 }
 .content h3{

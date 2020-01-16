@@ -148,7 +148,7 @@ public class MainController {
 						positionBenefitname = (String) positionBenefitFirstObject.get("Name");
 					}
 
-					positionURI = "https://t-systems.jobs/global-careers-en"
+					positionURI = "https://t-systems.jobs/global-careers-en/"
 							+ (String) matchedObjectDescriptor.get("PositionURI");
 					applicationDeadline = (String) matchedObjectDescriptor.get("ApplicationDeadline");
 
