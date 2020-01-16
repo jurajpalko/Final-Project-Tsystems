@@ -169,8 +169,8 @@ public class MainController {
 				} catch (IOException e) {
 					System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
 				}
-				qrCodes.add("<div class='qrcode'><img class='qr-code-image' th:src='@{/qrcode?number=" + ident
-						+ "}' alt='Qr code image.'/></div>");
+				qrCodes.add("<div class='qrcode'><img class='qr-code-image' src='/" + servletContext.getContextPath() + "qrcode?number=" + ident
+						+ "' alt='Qr code image.'/></div>");
 				ident ++;
 
 			}
