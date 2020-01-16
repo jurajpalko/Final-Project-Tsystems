@@ -13,6 +13,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -72,6 +73,8 @@ public class MainController {
 	private PositionService positionService;
 
 	private static final String QR_FOLDER = System.getProperty("java.io.tmpdir");
+	
+	private List<String> qrCodes = new ArrayList<>();
 	
 	@Scheduled(fixedRate = 10000000)
 	public void update() throws IOException, ParseException {
@@ -166,6 +169,8 @@ public class MainController {
 				} catch (IOException e) {
 					System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
 				}
+				qrCodes.add("<div class='qrcode'><img class='qr-code-image' th:src='@{/qrcode?number=" + ident
+						+ "}' alt='Qr code image.'/></div>");
 				ident ++;
 
 			}
@@ -218,6 +223,7 @@ public class MainController {
 				e.printStackTrace();
 			}
 		}
+		qrCodes.clear();
 	}
 	
 	
@@ -261,7 +267,10 @@ public class MainController {
 	public List<Position> getAll() {
 		return positionService.getAllPositions();
 	}
-
+	public List<String> getQrCodes() {
+		return qrCodes;
+	}
+	
 	public List<Position> getPositionList() {
 
 		return positionService.getPositionList();
