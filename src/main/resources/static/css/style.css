@@ -9,7 +9,7 @@ body{
 	height: 1200px;
 }
 .content h3{
-	margin-bottom: 1.5em;
+	margin-bottom: 2.7em;
 	text-align: center;
 	color: white;
 }
@@ -42,10 +42,7 @@ h1{
 .card.body {
 	padding: 1rem;
 }
-.qrcode{
-	width: 10em;
-    height: 9.5em;
-}
+
 .content{
 	margin: 0 auto;
 }
@@ -84,9 +81,10 @@ aside{
 	background: black;
 	padding:0.2em;
 }
-
-
-
+.qr-code-image{
+	width: 6em;
+	display: inline-block;
+}
 
 
 
