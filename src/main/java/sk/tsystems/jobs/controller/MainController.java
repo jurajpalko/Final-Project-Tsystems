@@ -285,6 +285,12 @@ public class MainController {
 	public Position getPosition() {
 		return positionService.getPosition(1);
 	}
+	
+	public long getCountOffers() {
+		return positionService.getAllCountOffers();
+	}
+	
+	
 
 	@RequestMapping(value = "/qrcode", method = RequestMethod.GET)
 	public void getQrCode(HttpServletResponse response, int number) throws IOException {

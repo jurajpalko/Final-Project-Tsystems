@@ -24,6 +24,12 @@
 	//Find all elements by paragraf	
 	var emptyEl = document.querySelectorAll('p');
 	
+	//Arrow function 
+	var cleaner = el => {
+		 if (el.innerHTML == '&nbsp;' || el.innerHTML == '') {
+	            el.parentNode.removeChild(el);
+	        }
+	}
 	//Hide all qr codes
 	//var qrCode = $('.card-header span').hide();
 	
@@ -34,11 +40,6 @@
         cleaner(el);
     }
 	//Remove &nbsp and empty string from whole HTML
-    function cleaner(el) {
-        if (el.innerHTML == '&nbsp;' || el.innerHTML == '') {
-            el.parentNode.removeChild(el);
-        }
-    }
 	
    
 	</script>

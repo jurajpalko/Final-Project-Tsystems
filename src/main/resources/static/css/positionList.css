@@ -26,17 +26,17 @@ img{
 
 .first{
 	width: 40%;
-	font-size: 0.6em;
+	font-size: 1.5em;
 	color:#ED008C;
 }
 
 th{
-	font-size: 0.5em;
+	font-size: 1.5em;
 	color: white;
 	background: black;
 }
 .table td, .table th{
-	padding: 1.5em;
+	padding: .5em;
 }
 
 .table .thead-dark th,.table-bordered td, .table-bordered th {

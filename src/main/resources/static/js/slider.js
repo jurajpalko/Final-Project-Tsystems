@@ -1,4 +1,3 @@
-setTimeout(mato, 10000);
 
 
 var slideIndex = 6;
@@ -20,19 +19,12 @@ function showSlides() {
 	slideIndex++;
 
 	if (slideIndex > slides.length) {
-		/*
-		 * for (i = 10; i < slides.length; i++) { slides[i].style.display =
-		 * "none";}
-		 */
+		
 		slideIndex = 1;
-
-		/*
-		 * for (i = 1; i < 10; i++) { slides[i].style.display = "table-row";}
-		 */
 	}
 
 	slides[slideIndex - 1].style.display = "table-row";
-/*	slides[slideIndex - 4].style.color = "white";*/
+slides[slideIndex - 4].style.color = "white !important";
 
 
 	if (slideIndex < 7) {
@@ -43,13 +35,11 @@ function showSlides() {
 	
 	}
 
-	setTimeout(showSlides, 1000);
+	setTimeout(showSlides, 10000);
 }
 
 
-function mato(){
 	
-}
 
 
 

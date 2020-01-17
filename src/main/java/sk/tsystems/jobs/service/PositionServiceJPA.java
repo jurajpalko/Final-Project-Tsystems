@@ -62,6 +62,13 @@ public class PositionServiceJPA implements PositionService {
 	}
 
 
+	@Override
+	public long getAllCountOffers() {
+		
+		return   (long) entityManager.createQuery("select count(p) from Position p").getSingleResult();
+	}
+
+
 
 }
 

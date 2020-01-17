@@ -15,4 +15,6 @@ public interface PositionService {
 	
 	
 	List<Position> getPositionList();
+	
+	long getAllCountOffers();
 }
