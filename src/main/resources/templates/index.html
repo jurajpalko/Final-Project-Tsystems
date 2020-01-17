@@ -84,12 +84,6 @@
 					</div>	
 					 <div class="card text-white mb-3 col-6">
 					 <img class="bg-light qr-code-img" th:src="@{/img/qrcode.png}" alt="qrcode"  />
-						<div class="card-header">
-							<span th:each="qrCode: ${@mainController.qrCodes}">
-										<span th:utext="${qrCode}"></span>
-									</span>
-							</div>
-							
 							<div class="card-body select-requirements" th:each="position : ${@mainController.all}">
 							<p class="card-text"><span th:utext="${position.requirementDescription}"></span></p>
 						</div> 

@@ -29,7 +29,10 @@ img{
 	font-size: 1.5em;
 	color:#ED008C;
 }
-
+.table{
+	margin-top: 0.5em;
+	
+}
 th{
 	font-size: 1.5em;
 	color: white;

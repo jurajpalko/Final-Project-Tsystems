@@ -24,7 +24,6 @@ function showSlides() {
 	}
 
 	slides[slideIndex - 1].style.display = "table-row";
-slides[slideIndex - 4].style.color = "white !important";
 
 
 	if (slideIndex < 7) {
@@ -35,7 +34,7 @@ slides[slideIndex - 4].style.color = "white !important";
 	
 	}
 
-	setTimeout(showSlides, 10000);
+	setTimeout(showSlides, 1000);
 }
 
 
