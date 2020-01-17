@@ -28,6 +28,7 @@ public class Position {
 	@Column(length = 10000)
 	private String salary;
 	
+	
 	public String getSalary() {
 		return salary;
 	}
