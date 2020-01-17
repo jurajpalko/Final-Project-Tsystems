@@ -1,11 +1,13 @@
 setTimeout(mato, 10000);
 
 
-var slideIndex = 5;
+var slideIndex = 6;
+/*var firstRow= slideIndex-4;*/
 
 var slides = document.getElementsByClassName("positionRow");
 
-for (i = 5; i < slides.length; i++) {
+
+for (i = 6; i < slides.length; i++) {
 	slides[i].style.display = "none";
 }
 
@@ -22,7 +24,7 @@ function showSlides() {
 		 * for (i = 10; i < slides.length; i++) { slides[i].style.display =
 		 * "none";}
 		 */
-		slideIndex = slides.length - 34
+		slideIndex = 1;
 
 		/*
 		 * for (i = 1; i < 10; i++) { slides[i].style.display = "table-row";}
@@ -30,11 +32,15 @@ function showSlides() {
 	}
 
 	slides[slideIndex - 1].style.display = "table-row";
+/*	slides[slideIndex - 4].style.color = "white";*/
 
-	if (slideIndex < 6) {
-		slides[slides.length - (6 - slideIndex)].style.display = "none";
+
+	if (slideIndex < 7) {
+		slides[slides.length - (7 - slideIndex)].style.display = "none";
+		
 	} else {
-		slides[slideIndex - 6].style.display = "none";
+		slides[slideIndex - 7].style.display = "none";
+	
 	}
 
 	setTimeout(showSlides, 1000);
