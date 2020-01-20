@@ -1,12 +1,12 @@
 
 
-var slideIndex = 6;
+var slideIndex = 9;
 /*var firstRow= slideIndex-4;*/
 
 var slides = document.getElementsByClassName("positionRow");
 
 
-for (i = 6; i < slides.length; i++) {
+for (i = 9; i < slides.length; i++) {
 	slides[i].style.display = "none";
 }
 
@@ -26,11 +26,11 @@ function showSlides() {
 	slides[slideIndex - 1].style.display = "table-row";
 
 
-	if (slideIndex < 7) {
-		slides[slides.length - (7 - slideIndex)].style.display = "none";
+	if (slideIndex < 10) {
+		slides[slides.length - (10 - slideIndex)].style.display = "none";
 		
 	} else {
-		slides[slideIndex - 7].style.display = "none";
+		slides[slideIndex - 10].style.display = "none";
 	
 	}
 

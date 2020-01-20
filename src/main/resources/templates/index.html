@@ -49,22 +49,19 @@
 			alt="Logo T-Systems" />
 			
 			<section class="col-6 screen-two">
-				<table class="table table-striped  table-bordered">
-					<thead class="thead-dark">
-						<tr>
-							<th class="first">Job title</th>
-							<th>Position ID</th>
-							<th>Employment type</th>
+				<table class="table table-striped table-dark">
+					<thead>
+						<tr class="first-row">
+							<th>Job title</th>
+							<th>Contract type</th>
 							<th>Posted</th>
 						</tr>
 					</thead>
 			<tbody>
-				<tr class="positionRow"
-					th:each="position : ${@mainController.positionList}">
-					<th class="first" th:text="${position.positionTitle}"></th>
-					<th><span th:text="${position.jobId}"></span></th>
-					<th><span th:text="${position.employmentType}"></span></th>
-					<th><span class="format-date" th:text="${position.publicationStartDate}"></span></th>
+				<tr class="positionRow" th:each="position : ${@mainController.positionList}">
+					<td class="first" th:text="${position.positionTitle}"></td>
+					<td><span th:text="${position.employmentType}"></span></td>
+					<td><span class="format-date" th:text="${position.publicationStartDate}"></span></td>
 				</tr>
 			</tbody>
 		</table>

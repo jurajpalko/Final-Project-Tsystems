@@ -6,10 +6,10 @@ for (var i = 0; i < x.length; i++) {
 }
 function formatDate(date) {
 	  var monthNames = [
-	    "Jan", "Feb", "Mar",
-	    "Apr", "May", "Jun", "Jul",
-	    "Aug", "Sep", "Oct",
-	    "Nov", "Dec"
+	    "1", "2", "3",
+	    "4", "5", "6", "7",
+	    "8", "9", "10",
+	    "11", "12"
 	  ];
 
 	  var day = date.getDate();
