@@ -8,30 +8,26 @@ var screens = document.getElementsByClassName("screens");
 var screen3 = document.getElementsByClassName("screen-three");
 var screen4 = document.getElementsByClassName("screen-four");
 
-for (i = 8; i < slides.length; i++) {
+for (i = 10; i < slides.length; i++) {
 	slides[i].style.display = "none";
 }
 
 for(i=0; i<screens.length;i++){
-	if (i==1||i==2) {
-		screens[i].style.display = "block";
-	}else{
+//	if (i==1) {
+//		screens[i].style.display = "block";
+//		screens[i].className = "col-6 screen-three screens";
+//	}else if(i==2){		
+//		screens[i].style.display = "block";
+//		screens[i].className = "col-6 screen-four screens";
+//	}
+//	else{
 		screens[i].style.display = "none";		
-	}
+//	}
 }
 
-//for (var a = 1; a < screen3.length; a++) {
-//
-//	screen3[a].style.display = "none";
-//}
-//for (var b = 1; b < screen4.length; b++) {
-//
-//	screen4[b].style.display = "none";
-//}
+var e =0;
 
-var e =2;
-//var count3 = 0;
-//var count4 = 0;
+var side = true;
 showSlides();
 
 
@@ -47,11 +43,11 @@ function showSlides() {
 
 	slides[slideIndex - 1].style.display = "table-row";
 
-	if (slideIndex < 9) {
-		slides[slides.length - (9 - slideIndex)].style.display = "none";
+	if (slideIndex < 11) {
+		slides[slides.length - (11 - slideIndex)].style.display = "none";
 
 	} else {
-		slides[slideIndex - 9].style.display = "none";
+		slides[slideIndex - 11].style.display = "none";
 
 	}
 	
@@ -59,24 +55,50 @@ function showSlides() {
 	if (e==0) {
 		screens[e].style.display = "block";
 		screens[screens.length-2].style.display = "none";
+		if (side==true) {
+			screens[screens.length-2].className = "screens"
+			screens[e].className = "col-6 screen-three screens";
+			side=false;
+		}else{
+			screens[screens.length-2].className = "screens"
+			screens[e].className = "col-6 screen-four screens";
+			side=true;
+		}
 		e++;
 	}
 	else if (e==1) {
 		screens[e].style.display = "block";
 		screens[screens.length-1].style.display = "none";
+		if (side==true) {
+			screens[screens.length-1].className = "screens"
+			screens[e].className = "col-6 screen-three screens";
+			side=false;
+		}else{
+			screens[screens.length-1].className = "screens"
+			screens[e].className = "col-6 screen-four screens";
+			side=true;
+		}
 		e++;
 	}
 	else{
 		screens[e].style.display = "block";
 		screens[e-2].style.display = "none";
+		if (side==true) {
+			screens[e-2].className = "screens"
+			screens[e].className = "col-6 screen-three screens";
+			side=false;
+		}else{
+			screens[e-2].className = "screens"
+			screens[e].className = "col-6 screen-four screens";
+			side=true;
+		}
 		e++;
 	}
 	if (e==screens.length) {
 		e=0;
 	}
-	
 
-	setTimeout(showSlides, 2000);
+	setTimeout(showSlides, 3000);
 }
 
 

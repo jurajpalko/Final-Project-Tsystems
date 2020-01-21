@@ -66,7 +66,8 @@
 </div>
 <div class="container-fluid">
 		<div class="row">
-			<section th:each="position,iterStat : ${@mainController.all}" th:class="${iterStat.even}?'col-6 screen-three screens':'col-6 screen-four screens'">
+		<section th:each="position,iterStat : ${@mainController.all}" class="col-6 screens">
+<!-- 			<section th:each="position,iterStat : ${@mainController.all}" th:class="${iterStat.even}?'col-6 screen-three screens':'col-6 screen-four screens'"> -->
 		
 				<h3 class="text-white" th:text="${position.positionTitle}"></h3>
 				<div class="container-fluid">
