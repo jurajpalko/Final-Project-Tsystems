@@ -4,11 +4,6 @@
 </head>
 <body>
 	<div th:fragment="footer">
-		<div class="global-footer">
-			<div class="container">
-				<p class="text-white text-right  p-3">&copy; T- Systems</p>
-			</div>
-		</div>
 		<script
 			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script
@@ -19,6 +14,7 @@
 			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 			crossorigin="anonymous"></script>
+				<script th:src="@{/js/progressBar.js}"></script>
 		<script>
 	
 	//Find all elements by paragraf	
@@ -45,6 +41,9 @@
 	</script>
 		<script th:src="@{/js/slider.js}"></script>
 		<script th:src="@{/js/date.js}"></script>
+		<script th:src="@{/js/data.js}"></script>
+		<script th:src="@{/js/loader.js}"></script>
+		
 	</div>
 
 

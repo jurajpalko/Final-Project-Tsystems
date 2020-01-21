@@ -76,7 +76,7 @@ function showSlides() {
 	}
 	
 
-	setTimeout(showSlides, 10000);
+	setTimeout(showSlides, 2000);
 }
 
 

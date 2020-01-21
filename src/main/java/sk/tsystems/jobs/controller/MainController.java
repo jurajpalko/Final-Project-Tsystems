@@ -156,8 +156,8 @@ public class MainController {
 						generateQRCodeImage(positionURI, 350, 350, QR_FOLDER + ident + ".png");
 						System.err.println(QR_FOLDER + ident + ".png" + " saved ");
 						
-						qrCodeImage = "<img class='qr-code-img bg-light' src='/" + servletContext.getContextPath()
-						+ "qrcode?number=" + ident + "' alt='Qr code image.'/>";
+						qrCodeImage = "<img class='qr-code-img bg-light' src='" + servletContext.getContextPath()
+						+ "/qrcode?number=" + ident + "' alt='Qr code image.'/>";
 					} catch (WriterException e) {
 						System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
 					} catch (IOException e) {
