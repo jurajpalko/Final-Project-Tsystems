@@ -70,7 +70,6 @@ public class MainController {
 
 	private static final String QR_FOLDER = System.getProperty("java.io.tmpdir");
 
-	private List<String> qrCodes = new ArrayList<>();
 
 	@Scheduled(fixedRate = 10000000)
 	public void update() throws IOException, ParseException {
@@ -112,6 +111,7 @@ public class MainController {
 				String publicationStartDate = null;
 				String positionBenefitname = null;
 				String salary = null;
+				String qrCodeImage = null;
 
 				JSONObject job = (JSONObject) allJobs.get(i);
 				JSONObject matchedObjectDescriptor = (JSONObject) job.get("MatchedObjectDescriptor");
@@ -151,10 +151,24 @@ public class MainController {
 					positionURI = "https://t-systems.jobs/global-careers-en/"
 							+ (String) matchedObjectDescriptor.get("PositionURI");
 					applicationDeadline = (String) matchedObjectDescriptor.get("ApplicationDeadline");
+					
+					try {
+						generateQRCodeImage(positionURI, 350, 350, QR_FOLDER + ident + ".png");
+						System.err.println(QR_FOLDER + ident + ".png" + " saved ");
+						
+						qrCodeImage = "<img class='qr-code-img bg-light' src='/" + servletContext.getContextPath()
+						+ "qrcode?number=" + ident + "' alt='Qr code image.'/>";
+					} catch (WriterException e) {
+						System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
+					} catch (IOException e) {
+						System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
+					}
 
+					
+					
 					Position p = new Position(ident, jobId, positionTitle, jobDescription, requirementDescription,
 							employmentType, positionURI, applicationDeadline, publicationStartDate, positionBenefitname,
-							salary);
+							salary,qrCodeImage);
 					positionService.addPosition(p);
 
 					// IDENT OF LAST ADDED POSITION
@@ -162,23 +176,12 @@ public class MainController {
 					//
 
 					// SAVING QR CODE OF THE POSITION
-					try {
-						generateQRCodeImage(positionURI, 350, 350, QR_FOLDER + ident + ".png");
-						System.err.println(QR_FOLDER + ident + ".png" + " saved ");
-
-					} catch (WriterException e) {
-						System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
-					} catch (IOException e) {
-						System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
-					}
-					qrCodes.add(
-							"<div class='qrcode'><img class='qr-code-image' src='/" + servletContext.getContextPath()
-									+ "qrcode?number=" + ident + "' alt='Qr code image.'/></div>");
+					
 					ident++;
 
 				}
 			}
-
+			
 		}
 
 	}
@@ -229,7 +232,7 @@ public class MainController {
 				e.printStackTrace();
 			}
 		}
-		qrCodes.clear();
+		
 	}
 
 	// METHOD FOR GENERATING QR CODES
@@ -273,9 +276,8 @@ public class MainController {
 		return positionService.getAllPositions();
 	}
 
-	public List<String> getQrCodes() {
-		return qrCodes;
-	}
+
+	
 
 	public List<Position> getPositionList() {
 

@@ -50,7 +50,7 @@ public class PositionServiceJPA implements PositionService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Position> getAllPositions() {
-		return (List<Position>) entityManager.createQuery("select p from Position p order by p.publicationStartDate desc").setMaxResults(1).getResultList();
+		return (List<Position>) entityManager.createQuery("select p from Position p order by p.publicationStartDate desc").getResultList();
 	}
 
 

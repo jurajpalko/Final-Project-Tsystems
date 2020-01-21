@@ -27,7 +27,7 @@ public class Position {
 	private String positionBenefitname;
 	@Column(length = 10000)
 	private String salary;
-	
+	private String qrCodeImage;
 	
 	public String getSalary() {
 		return salary;
@@ -146,12 +146,21 @@ public class Position {
 	public void setPublicationStartDate(String publicationStartDate) {
 		this.publicationStartDate = publicationStartDate;
 	}
-
+	
+	public String getQrCodeImage() {
+		return qrCodeImage;
+	}
+	
+	
+	
+	public void setQrCodeImage(String qrCodeImage) {
+		this.qrCodeImage = qrCodeImage;
+	}
 
 	
 	
 	public Position(int ident, String jobId, String positionTitle, String jobDescription, String requirementDescription,
-			String employmentType, String positionURI, String applicationDeadline, String publicationStartDate, String positionBenefitname, String salary ) {
+			String employmentType, String positionURI, String applicationDeadline, String publicationStartDate, String positionBenefitname, String salary, String qrCodeImage  ) {
 		
 		this.ident = ident;
 		this.jobId = jobId;
@@ -164,6 +173,7 @@ public class Position {
 		this.publicationStartDate = publicationStartDate;
 		this.positionBenefitname = positionBenefitname;
 		this.salary = salary;
+		this.qrCodeImage=qrCodeImage;
 		
 	}
 

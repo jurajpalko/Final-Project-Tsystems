@@ -49,6 +49,13 @@ h3{
 	width:667px;
 	
 }
-
-
+.screens{
+	position: absolute;
+}
+.screen-three{
+left: 0;
+}
+.screen-four{
+right: 0;
+}
 
