@@ -1,3 +1,16 @@
+//Find all elements by paragraf	
+				var emptyEl = document.querySelectorAll('p');
+				
+				//Arrow function 
+				var cleaner = el => {
+					 if (el.innerHTML == '&nbsp;' || el.innerHTML == '') {
+				            el.parentNode.removeChild(el);
+				        }
+				}
+				for (let el of emptyEl) {
+			        cleaner(el);
+			    }
+				
 var jobDes = $('.select-jobdescription');
 var strongEl = $('p>strong');
 
