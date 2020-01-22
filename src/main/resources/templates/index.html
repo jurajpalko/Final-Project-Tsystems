@@ -71,19 +71,22 @@
 		
 				<h3 class="text-white" th:text="${position.positionTitle}"></h3>
 				<div class="container-fluid">
-				<div class="row select-jobdescription">
+				<div class="row">
 					<div class="card text-white mb-3 col-6">
-						<h2>Job description</h2>
-						<div class="card-body">
-							<p class="card-text"><span th:utext="${position.jobDescription}"></span></p>  
-						</div>
+					<!-- REQUIREMENTS -->
+						<h2>Requirements</h2>
+							<div class="card-body select-requirements">
+								<span th:utext="${position.qrCodeImage}"></span>
+								<p class="card-text"><span th:utext="${position.requirementDescription}"></span></p>
+							</div> 
+						
 					</div>	
 					 <div class="card text-white mb-3 col-6">
-							<div class="card-body select-requirements">
-							 <h2>Requirements</h2>
-							<p class="card-text"><span th:utext="${position.requirementDescription}"></span></p>
-							<span th:utext="${position.qrCodeImage}"></span>
-						</div> 
+					 <!-- JOB DESCRIPTION -->
+					 <h2>Job description</h2>
+						<div class="card-body select-jobdescription">
+							<p class="card-text"><span th:utext="${position.jobDescription}"></span></p>  
+						</div>
 					</div>
 				</div>
 				</div>
@@ -109,7 +112,7 @@
 			        cleaner(el);
 			    }
 	</script>
-		<script th:src="@{/js/slider.js}"></script>
+		 <script th:src="@{/js/slider.js}"></script> 
 		<script th:src="@{/js/date.js}"></script>
 		<script th:src="@{/js/data.js}"></script>
 </body>

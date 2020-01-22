@@ -98,7 +98,7 @@ function showSlides() {
 		e=0;
 	}
 
-	setTimeout(showSlides, 3000);
+	setTimeout(showSlides, 1000);
 }
 
 

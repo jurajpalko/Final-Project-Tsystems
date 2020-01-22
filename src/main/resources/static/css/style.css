@@ -99,13 +99,14 @@ p>strong{
 h2{
 	text-transform: uppercase;
 	color: #e20074;
+	font-weight: bold;
 }
 .currentoffers{
 	color: #e20074;
 }
 
 .card{
-	height: 560px;
+	height: 623px;
 	overflow: hidden;
 }
 .first-row th{
@@ -113,3 +114,19 @@ h2{
 	margin:0;
 	
 }
+strong{
+	font-weight: normal;
+}
+
+div > strong{
+	flex: 0 0 50%;
+    max-width: 50%;
+}
+
+body > div:nth-child(2) > div > section:nth-child(14) > div > div > strong > div{
+	flex: 0 0 100%;
+    max-width: 100%;
+}
+
+
+
