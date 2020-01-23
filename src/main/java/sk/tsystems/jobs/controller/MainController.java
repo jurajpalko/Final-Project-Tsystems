@@ -125,53 +125,84 @@ public class MainController {
 
 					requirementDescription = (String) userArea.get("TextRequirementDescription");
 					salary = findSalary(requirementDescription, jobDescription);
-					
-					jobDescription = jobDescription.replaceAll("<p>&nbsp;</p>","");
-					jobDescription = jobDescription.replaceAll("<p> </p>","");
+
+					jobDescription = jobDescription.replaceAll("<p>&nbsp;</p>", "");
+					jobDescription = jobDescription.replaceAll("<p> </p>", "");
 					Document doc = Jsoup.parse(jobDescription);
-					
+
 					requirementDescription = (String) userArea.get("TextRequirementDescription");
-					requirementDescription = requirementDescription.replaceAll("<p>&nbsp;</p>","");
-					requirementDescription = requirementDescription.replaceAll("<p> </p>","");
+					requirementDescription = requirementDescription.replaceAll("<p>&nbsp;</p>", "");
+					requirementDescription = requirementDescription.replaceAll("<p> </p>", "");
 					Document doc1 = Jsoup.parse(requirementDescription);
-					
+
+					//findElementWhenTextIsInStrong(doc1, "Experie");
+
 					String languages = doc1.select("p>strong:contains(Languages)").parents().next().toString();
 					String education = doc1.select("p>strong:contains(Education)").parents().next().toString();
 					String experience = doc1.select("p>strong:contains(experience)").parents().next().toString();
 					String others = doc1.select("p>strong:contains(others)").parents().next().toString();
-					String accountabilities = doc.select("p>strong:contains(accountabilities)").parents().next().toString();
-					String generalDescription = doc.select("p>strong:contains(general description)").parents().next().toString();
+					String accountabilities = doc.select("p>strong:contains(accountabilities)").parents().next()
+							.toString();
+					String generalDescription = doc.select("p>strong:contains(general description)").parents().next()
+							.toString();
 					String softSkills = doc1.select("p>strong:contains(soft Skills)").parents().next().toString();
-					String iTTechnicalSkills = doc1.select("p>strong:contains(IT Technical Skills)").parents().next().toString();
-					String technicalSkills = doc1.select("p>strong:contains(Technical Skills)").parents().next().toString();
+					String iTTechnicalSkills = doc1.select("p>strong:contains(IT Technical Skills)").parents().next()
+							.toString();
+					String technicalSkills = doc1.select("p>strong:contains(Technical Skills)").parents().next()
+							.toString();
 					String language = doc1.select("p>strong:contains(language)").parents().next().toString();
 					String experiences = doc1.select("p>strong:contains(experiences)").parents().next().toString();
 					String yourSkills = doc1.select("p>strong:contains(Your skills)").parents().next().toString();
-					String otherCriteriaOrRequirements = doc1.select("p>strong:contains(Other criteria or requirements)").parents().next().toString();
+					String otherCriteriaOrRequirements = doc1
+							.select("p>strong:contains(Other criteria or requirements)").parents().next().toString();
 					String purpose = doc.select("p>strong:contains(purpose)").parents().next().toString();
-					
-					String education1 = doc1.select("p:matchesOwn((?i)education)").next().toString();
-					String languages1 = doc1.select("p:matchesOwn((?i)languages)").next().toString();
-					String experience1 = doc1.select("p:matchesOwn((?i)experience)").next().toString();
-					String others1 = doc1.select("p:matchesOwn((?i)others)").next().toString();
-					String accountabilities1 = doc.select("p:matchesOwn((?i)accountabilities)").next().toString();
-					String language1 = doc1.select("p:matchesOwn((?i)language)").next().toString();
-					String experiences1 = doc1.select("p:matchesOwn((?i)experiences)").next().toString();
-					String generalDescription1 = doc.select("p:matchesOwn((?i)general description)").next().toString();
-					String softSkills1 = doc1.select("p:matchesOwn((?i)soft Skills)").next().toString();
-					String iTTechnicalSkills1 = doc1.select("p:matchesOwn((?i)IT Technical Skills)").next().toString();
-					String technicalSkills1 = doc1.select("p:matchesOwn((?i)Technical Skills)").next().toString();
-					String yourSkills1 = doc1.select("p:matchesOwn((?i)Your skills)").next().toString();
-					String otherCriteriaOrRequirements1 = doc1.select("p:matchesOwn((?i)Other criteria or requirements)").next().toString();
-					String purpose1 = doc.select("p:matchesOwn((?i)Purpose)").next().toString();
-					
-//					jobDescription = deleteAllFrom(jobDescription, "Salary");
-//					jobDescription = deleteAllFrom(jobDescription, "Requirements");
-//					jobDescription = deleteAllFrom(jobDescription, "Other Benefits");
-//					jobDescription = deleteAllFrom(jobDescription, "Experiences/Skills");
-//					jobDescription = deleteAllFrom(jobDescription, "Your skills");
-//					jobDescription = deleteAllFrom(jobDescription, "Benefits of working with us:");
 
+					
+					
+					
+//					String education1 = doc1.select("p:matchesOwn((?i)education)").next().toString();
+					String languages1 = doc1.select("p:matchesOwn((?i)languages)").next().toString();   //asi netreba
+//					String experience1 = doc1.select("p:matchesOwn((?i)experience)").next().toString();
+
+//					System.out.println("******************************************************");
+//				System.out.println(experience1);
+//			System.out.println("******************************************************");
+
+//					String others1 = doc1.select("p:matchesOwn((?i)others)").next().toString();
+//					String accountabilities1 = doc.select("p:matchesOwn((?i)accountabilities)").next().toString();
+					//String language1 = doc1.select("p:matchesOwn((?i)language)").next().toString();
+					
+					String experiences1 = doc1.select("p:matchesOwn((?i)experiences)").next().toString();   // asi netreba
+					
+	//				String generalDescription1 = doc.select("p:matchesOwn((?i)general description)").next().toString();
+//					String softSkills1 = doc1.select("p:matchesOwn((?i)soft Skills)").next().toString();
+				String iTTechnicalSkills1 = doc1.select("p:matchesOwn((?i)IT Technical Skills)").next().toString(); //asi netreba
+//					String technicalSkills1 = doc1.select("p:matchesOwn((?i)Technical Skills)").next().toString();
+//					String yourSkills1 = doc1.select("p:matchesOwn((?i)Your skills)").next().toString();
+//					String otherCriteriaOrRequirements1 = doc1.select("p:matchesOwn((?i)Other criteria or requirements)").next().toString();
+//					String purpose1 = doc.select("p:matchesOwn((?i)Purpose)").next().toString();
+
+					String language1 = findElement(doc1, "language");
+					String education1 = findElement(doc1, "education");
+					String experience1 = findElement(doc1, "experience");
+					String others1 = findElement(doc1, "others");
+					String accountabilities1 = findElement(doc, "accountabilities");
+					String generalDescription1 = findElement(doc, "general escription");
+					String softSkills1 = findElement(doc1, "Soft Skills");
+					String technicalSkills1 = findElement(doc1, "Technical Skills");
+					String yourSkills1 = findElement(doc1, "Your Skills");
+					String otherCriteriaOrRequirements1 = findElement(doc1, "Other criteria or requirements");
+					String purpose1 = findElement(doc1, "Purpose");
+					
+					
+
+					
+					
+					
+					
+					
+					
+					
 					jobDescription = Jsoup.parse(jobDescription).text();
 					jobDescription = jobDescription.replaceAll("General description/ Purpose", "");
 					jobDescription = jobDescription.replaceAll("General description/", "");
@@ -182,10 +213,7 @@ public class MainController {
 					jobDescription = jobDescription.replaceAll("Purpose", "");
 					jobDescription = jobDescription.replaceAll("•", "");
 					jobDescription = jobDescription.substring(0, 150).trim() + "...";
-					
-					
 
-					
 					publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
 					JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
 					if (positionSchedule.size() > 0) {
@@ -216,11 +244,11 @@ public class MainController {
 
 					Position p = new Position(ident, jobId, positionTitle, jobDescription, requirementDescription,
 							employmentType, positionURI, applicationDeadline, publicationStartDate, positionBenefitname,
-							salary, qrCodeImage, education, languages, experience, others, accountabilities, generalDescription,
-							softSkills, iTTechnicalSkills, technicalSkills, language, experiences, yourSkills, 
-							otherCriteriaOrRequirements, purpose, education1, languages1, experience1, others1, 
-							accountabilities1, language1, experiences1, generalDescription1, softSkills1, iTTechnicalSkills1,
-							technicalSkills1, yourSkills1, otherCriteriaOrRequirements1, purpose1);
+							salary, qrCodeImage, education, languages, experience, others, accountabilities,
+							generalDescription, softSkills, iTTechnicalSkills, technicalSkills, language, experiences,
+							yourSkills, otherCriteriaOrRequirements, purpose, education1, languages1, experience1,
+							others1, accountabilities1, language1, experiences1, generalDescription1, softSkills1,
+							iTTechnicalSkills1, technicalSkills1, yourSkills1, otherCriteriaOrRequirements1, purpose1);
 					positionService.addPosition(p);
 
 					// IDENT OF LAST ADDED POSITION
@@ -238,11 +266,30 @@ public class MainController {
 
 	}
 
+	private void findElementWhenTextIsInStrong(Document doc, String text) {
+		if (doc.select("p>strong:contains(" + text + ")").text().length() > (text.length() + 10)) {
+
+			System.out.println("-------------------------------------------");
+			System.out.println(doc.select("p>strong:contains("+ text + ")").toString());
+			System.out.println("-------------------------------------------");
+
+		}
+		// return "nejaky string";
+	}
+
+	private String findElement(Document doc, String text) {
+		if (doc.select("p:matchesOwn((?i)" + text + ")").text().length() > (text.length() + 10)) {
+			return (doc.select("p:matchesOwn((?i)" + text +  ")").text().toString());
+		} else {
+			return (doc.select("p:matchesOwn((?i)" + text +  ")").next().text().toString());
+		}
+	}
+
 	private String findSalary(String str1, String str2) {
 		String salary;
 		salary = selectAllFrom(str1, "Salary");
 		salary = salaryRegExp(salary);
-		if(salary == null) {
+		if (salary == null) {
 			salary = selectAllFrom(str2, "Salary");
 			salary = salaryRegExp(salary);
 		}
@@ -255,7 +302,7 @@ public class MainController {
 			Matcher matcher = pattern.matcher(salary);
 			if (matcher.matches()) {
 				int beggining = matcher.end(1);
-				salary = salary.substring(beggining,beggining+4);
+				salary = salary.substring(beggining, beggining + 4);
 				if (!Character.isDigit(salary.charAt(3)))
 					salary = salary.substring(0, 3);
 				return salary;
