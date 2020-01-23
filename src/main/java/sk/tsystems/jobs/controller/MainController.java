@@ -258,10 +258,10 @@ public class MainController {
 				salary = salary.substring(beggining,beggining+4);
 				if (!Character.isDigit(salary.charAt(3)))
 					salary = salary.substring(0, 3);
-				return null;
+				return salary;
 			}
 		}
-		return salary;
+		return null;
 	}
 
 	private static String deleteAllFrom(String mainString, String subString) {
