@@ -36,14 +36,14 @@
 					<thead>
 						<tr class="first-row">
 							<th>Job title</th>
-							<th>Contract type</th>
+							<th>Salary</th>
 							<th>Posted</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="positionRow" th:each="position : ${@mainController.positionList}">
 							<td class="first" th:text="${position.positionTitle}"></td>
-							<td><span th:text="${position.employmentType}"></span></td>
+							<td ><span class= "ml-3" th:text="${position.salary}"></span> €</td>
 							<td><span class="format-date" th:text="${position.publicationStartDate}"></span></td>
 						</tr>
 					</tbody>
@@ -55,8 +55,8 @@
 		<div class="row">
 			<section th:each="position,iterStat : ${@mainController.all}" class="col-6 screens">
 <!-- 			<section th:each="position,iterStat : ${@mainController.all}" th:class="${iterStat.even}?'col-6 screen-three screens':'col-6 screen-four screens'"> -->
-				<h3 class="text-white" th:text="${position.positionTitle}"></h3>
 				<div class="container-fluid">
+				<h3 class="text-white" th:text="${position.positionTitle}"></h3>
 					<div class="row">
 						<div class="card text-white mb-3 col-6">
 						<!-- REQUIREMENTS -->
@@ -70,7 +70,11 @@
 						 <h2>Job description</h2>
 							<div class="card-body select-jobdescription">
 								<p class="card-text"><span th:utext="${position.jobDescription}"></span></p>  
+								<div class="qrsection">
+								<div class= "qrInfo"> <p >FOR MORE INFO</p><p>SCAN THE CODE</p></div>
 								<span th:utext="${position.qrCodeImage}"></span>
+							
+							</div>
 							</div>
 						</div>
 					</div>
