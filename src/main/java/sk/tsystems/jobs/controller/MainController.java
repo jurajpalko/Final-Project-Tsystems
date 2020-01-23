@@ -29,6 +29,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -125,6 +126,45 @@ public class MainController {
 					requirementDescription = (String) userArea.get("TextRequirementDescription");
 					salary = findSalary(requirementDescription, jobDescription);
 					
+					jobDescription = jobDescription.replaceAll("<p>&nbsp;</p>","");
+					jobDescription = jobDescription.replaceAll("<p> </p>","");
+					Document doc = Jsoup.parse(jobDescription);
+					
+					requirementDescription = (String) userArea.get("TextRequirementDescription");
+					requirementDescription = requirementDescription.replaceAll("<p>&nbsp;</p>","");
+					requirementDescription = requirementDescription.replaceAll("<p> </p>","");
+					Document doc1 = Jsoup.parse(requirementDescription);
+					
+					String languages = doc1.select("p>strong:contains(Languages)").parents().next().toString();
+					String education = doc1.select("p>strong:contains(Education)").parents().next().toString();
+					String experience = doc1.select("p>strong:contains(experience)").parents().next().toString();
+					String others = doc1.select("p>strong:contains(others)").parents().next().toString();
+					String accountabilities = doc.select("p>strong:contains(accountabilities)").parents().next().toString();
+					String generalDescription = doc.select("p>strong:contains(general description)").parents().next().toString();
+					String softSkills = doc1.select("p>strong:contains(soft Skills)").parents().next().toString();
+					String iTTechnicalSkills = doc1.select("p>strong:contains(IT Technical Skills)").parents().next().toString();
+					String technicalSkills = doc1.select("p>strong:contains(Technical Skills)").parents().next().toString();
+					String language = doc1.select("p>strong:contains(language)").parents().next().toString();
+					String experiences = doc1.select("p>strong:contains(experiences)").parents().next().toString();
+					String yourSkills = doc1.select("p>strong:contains(Your skills)").parents().next().toString();
+					String otherCriteriaOrRequirements = doc1.select("p>strong:contains(Other criteria or requirements)").parents().next().toString();
+					String purpose = doc.select("p>strong:contains(purpose)").parents().next().toString();
+					
+					String education1 = doc1.select("p:matchesOwn((?i)education)").next().toString();
+					String languages1 = doc1.select("p:matchesOwn((?i)languages)").next().toString();
+					String experience1 = doc1.select("p:matchesOwn((?i)experience)").next().toString();
+					String others1 = doc1.select("p:matchesOwn((?i)others)").next().toString();
+					String accountabilities1 = doc.select("p:matchesOwn((?i)accountabilities)").next().toString();
+					String language1 = doc1.select("p:matchesOwn((?i)language)").next().toString();
+					String experiences1 = doc1.select("p:matchesOwn((?i)experiences)").next().toString();
+					String generalDescription1 = doc.select("p:matchesOwn((?i)general description)").next().toString();
+					String softSkills1 = doc1.select("p:matchesOwn((?i)soft Skills)").next().toString();
+					String iTTechnicalSkills1 = doc1.select("p:matchesOwn((?i)IT Technical Skills)").next().toString();
+					String technicalSkills1 = doc1.select("p:matchesOwn((?i)Technical Skills)").next().toString();
+					String yourSkills1 = doc1.select("p:matchesOwn((?i)Your skills)").next().toString();
+					String otherCriteriaOrRequirements1 = doc1.select("p:matchesOwn((?i)Other criteria or requirements)").next().toString();
+					String purpose1 = doc.select("p:matchesOwn((?i)Purpose)").next().toString();
+					
 //					jobDescription = deleteAllFrom(jobDescription, "Salary");
 //					jobDescription = deleteAllFrom(jobDescription, "Requirements");
 //					jobDescription = deleteAllFrom(jobDescription, "Other Benefits");
@@ -176,7 +216,11 @@ public class MainController {
 
 					Position p = new Position(ident, jobId, positionTitle, jobDescription, requirementDescription,
 							employmentType, positionURI, applicationDeadline, publicationStartDate, positionBenefitname,
-							salary, qrCodeImage);
+							salary, qrCodeImage, education, languages, experience, others, accountabilities, generalDescription,
+							softSkills, iTTechnicalSkills, technicalSkills, language, experiences, yourSkills, 
+							otherCriteriaOrRequirements, purpose, education1, languages1, experience1, others1, 
+							accountabilities1, language1, experiences1, generalDescription1, softSkills1, iTTechnicalSkills1,
+							technicalSkills1, yourSkills1, otherCriteriaOrRequirements1, purpose1);
 					positionService.addPosition(p);
 
 					// IDENT OF LAST ADDED POSITION
