@@ -25,7 +25,6 @@ public class Position {
 	private String applicationDeadline;
 	private String publicationStartDate;
 	private String positionBenefitname;
-	@Column(length = 10000)
 	private String salary;
 	private String qrCodeImage;
 	private String education;
