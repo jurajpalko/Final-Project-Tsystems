@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +28,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -70,7 +73,6 @@ public class MainController {
 
 	private static final String QR_FOLDER = System.getProperty("java.io.tmpdir");
 
-
 	@Scheduled(fixedRate = 10000000)
 	public void update() throws IOException, ParseException {
 
@@ -83,11 +85,9 @@ public class MainController {
 		if (jsonObject != null) {
 
 			JSONObject searchResult = (JSONObject) jsonObject.get("SearchResult");
-			
-			
+
 			Long numberOfJobs = (Long) searchResult.get("SearchResultCount");
-			
-			
+
 			JSONArray allJobs = (JSONArray) searchResult.get("SearchResultItems");
 
 			// DELETING CONTENT OF IMG/QRs FOLDER
@@ -122,19 +122,18 @@ public class MainController {
 
 				if (jobDescription != null) {
 
-					jobDescription = deleteAllFrom(jobDescription, "Salary");
-					jobDescription = deleteAllFrom(jobDescription, "Requirements");
-					jobDescription = deleteAllFrom(jobDescription, "Other Benefits");
-					jobDescription = deleteAllFrom(jobDescription, "Experiences/Skills");
-					jobDescription = deleteAllFrom(jobDescription, "Your skills");
-					jobDescription = deleteAllFrom(jobDescription, "Benefits of working with us:");
-
 					requirementDescription = (String) userArea.get("TextRequirementDescription");
+					salary = findSalary(requirementDescription, jobDescription);
+					
+//					jobDescription = deleteAllFrom(jobDescription, "Salary");
+//					jobDescription = deleteAllFrom(jobDescription, "Requirements");
+//					jobDescription = deleteAllFrom(jobDescription, "Other Benefits");
+//					jobDescription = deleteAllFrom(jobDescription, "Experiences/Skills");
+//					jobDescription = deleteAllFrom(jobDescription, "Your skills");
+//					jobDescription = deleteAllFrom(jobDescription, "Benefits of working with us:");
 
-					salary = selectAllFrom(requirementDescription, "Salary");
-					if (salary != null) {
-						salary = deleteAllFrom(salary, "<p>We expect from you");
-					}
+					jobDescription = Jsoup.parse(jobDescription).text();
+					jobDescription = jobDescription.substring(0, 150) + "...";
 
 					publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
 					JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
@@ -151,24 +150,22 @@ public class MainController {
 					positionURI = "https://t-systems.jobs/global-careers-en/"
 							+ (String) matchedObjectDescriptor.get("PositionURI");
 					applicationDeadline = (String) matchedObjectDescriptor.get("ApplicationDeadline");
-					
+
 					try {
 						generateQRCodeImage(positionURI, 350, 350, QR_FOLDER + ident + ".png");
 						System.err.println(QR_FOLDER + ident + ".png" + " saved ");
-						
+
 						qrCodeImage = "<img class='qr-code-img bg-light' src='" + servletContext.getContextPath()
-						+ "/qrcode?number=" + ident + "' alt='Qr code image.'/>";
+								+ "/qrcode?number=" + ident + "' alt='Qr code image.'/>";
 					} catch (WriterException e) {
 						System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
 					} catch (IOException e) {
 						System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
 					}
 
-					
-					
 					Position p = new Position(ident, jobId, positionTitle, jobDescription, requirementDescription,
 							employmentType, positionURI, applicationDeadline, publicationStartDate, positionBenefitname,
-							salary,qrCodeImage);
+							salary, qrCodeImage);
 					positionService.addPosition(p);
 
 					// IDENT OF LAST ADDED POSITION
@@ -176,14 +173,40 @@ public class MainController {
 					//
 
 					// SAVING QR CODE OF THE POSITION
-					
+
 					ident++;
 
 				}
 			}
-			
+
 		}
 
+	}
+
+	private String findSalary(String str1, String str2) {
+		String salary;
+		salary = selectAllFrom(str1, "Salary");
+		salary = salaryRegExp(salary);
+		if(salary == null) {
+			salary = selectAllFrom(str2, "Salary");
+			salary = salaryRegExp(salary);
+		}
+		return salary;
+	}
+
+	private String salaryRegExp(String salary) {
+		if (salary != null) {
+			Pattern pattern = Pattern.compile("(\\D)+([0-9]){3,4}(.*)");
+			Matcher matcher = pattern.matcher(salary);
+			if (matcher.matches()) {
+				int beggining = matcher.end(1);
+				salary = salary.substring(beggining,beggining+4);
+				if (!Character.isDigit(salary.charAt(3)))
+					salary = salary.substring(0, 3);
+				return salary;
+			}
+		}
+		return salary;
 	}
 
 	private static String deleteAllFrom(String mainString, String subString) {
@@ -232,7 +255,7 @@ public class MainController {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
 	// METHOD FOR GENERATING QR CODES
@@ -276,9 +299,6 @@ public class MainController {
 		return positionService.getAllPositions();
 	}
 
-
-	
-
 	public List<Position> getPositionList() {
 
 		return positionService.getPositionList();
@@ -287,12 +307,10 @@ public class MainController {
 	public Position getPosition() {
 		return positionService.getPosition(1);
 	}
-	
+
 	public long getCountOffers() {
 		return positionService.getAllCountOffers();
 	}
-	
-	
 
 	@RequestMapping(value = "/qrcode", method = RequestMethod.GET)
 	public void getQrCode(HttpServletResponse response, int number) throws IOException {
