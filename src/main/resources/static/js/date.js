@@ -5,14 +5,13 @@ for (var i = 0; i < x.length; i++) {
 	  x[i].innerHTML = formatDate (new Date(Date.parse(temp[i])));
 }
 function formatDate(date) {
-	  var monthNames = [
-	    "1", "2", "3",
-	    "4", "5", "6", "7",
-	    "8", "9", "10",
-	    "11", "12"
-	  ];
+	
+
+	  var monthNames = [ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" ];
 
 	  var day = date.getDate();
+	  
+	  if(day<10) day = "0"+day;
 	  var monthIndex = date.getMonth();
 	  var year = date.getFullYear();
 

@@ -133,8 +133,19 @@ public class MainController {
 //					jobDescription = deleteAllFrom(jobDescription, "Benefits of working with us:");
 
 					jobDescription = Jsoup.parse(jobDescription).text();
-					jobDescription = jobDescription.substring(0, 150) + "...";
+					jobDescription = jobDescription.replaceAll("General description/ Purpose", "");
+					jobDescription = jobDescription.replaceAll("General description/", "");
+					jobDescription = jobDescription.replaceAll("General description", "");
+					jobDescription = jobDescription.replaceAll("General Description/ Purpose", "");
+					jobDescription = jobDescription.replaceAll("General Description/", "");
+					jobDescription = jobDescription.replaceAll("General Description", "");
+					jobDescription = jobDescription.replaceAll("Purpose", "");
+					jobDescription = jobDescription.replaceAll("•", "");
+					jobDescription = jobDescription.substring(0, 150).trim() + "...";
+					
+					
 
+					
 					publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
 					JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
 					if (positionSchedule.size() > 0) {
