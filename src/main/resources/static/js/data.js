@@ -1,5 +1,6 @@
 //Find all elements by paragraf	
 				var emptyEl = document.querySelectorAll('p');
+				var brEl = $('br');
 				
 				//Arrow function 
 				var cleaner = el => {
@@ -20,3 +21,4 @@ $('span:empty:only-child').parent('p').remove();
 $("li:nth-child(n+3)").hide();
 
 strongEl.remove();
+brEl.remove();

@@ -3,6 +3,7 @@
 <head>
     <title>Job offers</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap&subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
@@ -15,7 +16,7 @@
 		SHORT INTRODUCTION
 		NUMBER OF FREE POSITIONS 
 		CAROUSEL WITH 4 ITEMS -->
-			<section class="col-6 screen-one">
+			<section class="col-lg-6 col-sm-12 screen-one">
 				<img class="mt-2 logotsystems" th:src="@{/img/t-systemslogo.svg}" alt="Logo T-Systems" />
 				<h1 class="text-center">Looking for a job ? </h1>	
 				<h4  class="text-center">We have <span class="currentoffers"><span th:text="${@mainController.countOffers}"></span> offers  </span>in Košice for you. Everyone has an opportunity with us.</h4>
@@ -40,7 +41,7 @@
 			<!-- SECOND SCREEN
 			SHORT INFO LIST OF ALL POSITIONS DISPLAYING 10 AT A TIME
 			WITH TITLE, CONTRACT TYPE AND POST DATE -->
-			<section class="col-6 screen-two">
+			<section class="col-lg-6 col-sm-12 screen-two">
 				<table class="table table-striped table-dark">
 					<thead>
 						<tr class="first-row">
@@ -83,7 +84,7 @@
 							<div class="card-body select-jobdescription">
 								<div class="text-job-description"><p class="card-text"><span th:utext="${position.jobDescription}"></span></p>  </div>
 								<div class="qrsection">
-								<div class= "qrInfo"> <p >FOR MORE INFO</p><p>SCAN THE CODE</p></div>
+								<div class= "qrInfo"> <p>FOR MORE INFO</p><p>SCAN THE CODE</p></div>
 								<span th:utext="${position.qrCodeImage}"></span>
 							
 							</div>

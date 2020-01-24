@@ -6,19 +6,21 @@
 
 *{
 	font-family: 'Roboto', sans-serif;
-	color: rgba(255,255,255, .7) !important; 
+	color: rgba(255,255,255, .8) !important; 
 }
 body{
 	background: url('../img/woodbg.jpg');
 	background-size: cover;
-	overflow: hidden;
+	/*overflow: hidden;*/
 	font-size: 100%;
+
+
 	
 }
-.col-6{
+.col-lg-6{
 	padding: 1.5em;
-	padding-bottom: 0.2em; 
-}
+	padding-bottom: 0.2em;
+	}
 .screen-one,.screen-two,.screen-three,.screen-four{
 	background: rgba(0,0,0,0.8);
 }
@@ -161,7 +163,7 @@ h3{
 	width: 12em;
 	margin-left: 11em;
     margin-top: -4em;
-    opacity: .7;
+    opacity: .8;
 }
 
 .qrInfo{
@@ -200,4 +202,34 @@ left: 0;
 .screen-four{
 right: 0;
 } 
+
+/*
+**----------------------------
+**      MEDIA QUERIES - DISPLAY 3 x 3
+**----------------------------
+*/
+
+@media (min-width: 2600px){
+	body{
+	font-size: 190%;
+	}
+	h2{
+	font-size: 2em;}
+	thead th:last-child{
+		width: 300px;	
+	}
+	thead th:nth-child(2){
+		width: 300px;
+		
+	}
+}
+@media (max-width: 542px){
+	
+	.screen-three, .screen-four{
+	display: none;
+	}
+}
+
+
+
 
