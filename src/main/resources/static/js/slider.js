@@ -1,28 +1,26 @@
 
 var slideIndex = 8;
-/* var firstRow= slideIndex-4; */
 
+//SHORT INFO OF POSITIONS FOR SCREEN 2, LIST OF POSITIONS
 var slides = document.getElementsByClassName("positionRow");
 
+//MORE DETAILED INFO OF POSTIONS FOR SCREENS 3 AND 4
 var screens = document.getElementsByClassName("screens");
-var screen3 = document.getElementsByClassName("screen-three");
-var screen4 = document.getElementsByClassName("screen-four");
 
+/*
+ * ON START SETS ALL POSITION ROWS FROM POSITION LIST EXCEPT FOR FIRST 10 TO DISPLAY-NONE
+ * */
 for (i = 10; i < slides.length; i++) {
 	slides[i].style.display = "none";
 }
 
+/*
+ * ON START SETS ALL POSITIONS TO DISPLAY-NONE
+ * */
 for(i=0; i<screens.length;i++){
-//	if (i==1) {
-//		screens[i].style.display = "block";
-//		screens[i].className = "col-6 screen-three screens";
-//	}else if(i==2){		
-//		screens[i].style.display = "block";
-//		screens[i].className = "col-6 screen-four screens";
-//	}
-//	else{
+
 		screens[i].style.display = "none";		
-//	}
+
 }
 
 var e =0;
@@ -30,7 +28,9 @@ var e =0;
 var side = true;
 showSlides();
 
-
+/* ON THE SCREEN 2
+ * ITERATES OVER A LIST OF POSITONS DISPLAYING 10 ROWS WITH SHORT INFO AT A TIME, MOVING BY ONE ROW
+ * */
 function showSlides() {
 
 
@@ -51,6 +51,10 @@ function showSlides() {
 
 	}
 	
+	/* ON THE SCREEN 3 AND 4
+	 * ITERATES OVER A LIST OF POSTIONS DISPLAYING 2 POSITIONS AT A TIME WITH MORE INFO, SWITCHING SCREEN 3 AND SCREEN 4 FOR NEXT POSITION
+	 * SETTING DISPLAY-BLOCK FOR 1 POSITON AND DISPALY-NONE FOR PREVIOUS ONE BY ONE
+	 * */
 	
 	if (e==0) {
 		screens[e].style.display = "block";
@@ -98,6 +102,7 @@ function showSlides() {
 		e=0;
 	}
 
+	// TIME FOR ONE STEP AND SELF CALL
 	setTimeout(showSlides, 5000);
 }
 

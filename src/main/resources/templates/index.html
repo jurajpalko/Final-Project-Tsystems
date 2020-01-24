@@ -10,6 +10,11 @@
 <body>
 	<div class="container-fluid">
 		<div class="row">
+		
+		<!-- FIRST SCREEN
+		SHORT INTRODUCTION
+		NUMBER OF FREE POSITIONS 
+		CAROUSEL WITH 4 ITEMS -->
 			<section class="col-6 screen-one">
 				<img class="mt-2 logotsystems" th:src="@{/img/t-systemslogo.svg}" alt="Logo T-Systems" />
 				<h1 class="text-white text-center">Looking for a job ? </h1>	
@@ -31,6 +36,10 @@
 				  </div>
 				</div>
 			</section>
+			
+			<!-- SECOND SCREEN
+			SHORT INFO LIST OF ALL POSITIONS DISPLAYING 10 AT A TIME
+			WITH TITLE, CONTRACT TYPE AND POST DATE -->
 			<section class="col-6 screen-two">
 				<table class="table table-striped table-dark">
 					<thead>
@@ -53,8 +62,11 @@
 	</div>
 	<div class="container-fluid">
 		<div class="row">
+		
+		<!-- SCREEN THREE AND SCREEN FOUR
+		MORE DETAILED INFO OF ONE OF THE POSITIONS ON ONE SCREEN -->
 			<section th:each="position,iterStat : ${@mainController.all}" class="col-6 screens">
-<!-- 			<section th:each="position,iterStat : ${@mainController.all}" th:class="${iterStat.even}?'col-6 screen-three screens':'col-6 screen-four screens'"> -->
+
 				<div class="container-fluid">
 				<h3 class="text-white" th:text="${position.positionTitle}"></h3>
 					<div class="row">
