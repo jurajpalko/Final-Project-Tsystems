@@ -135,7 +135,7 @@ public class MainController {
 					requirementDescription = requirementDescription.replaceAll("<p> </p>", "");
 					Document doc1 = Jsoup.parse(requirementDescription);
 
-					//findElementWhenTextIsInStrong(doc1, "Experie");
+					// findElementWhenTextIsInStrong(doc1, "Experie");
 
 					String languages = doc1.select("p>strong:contains(Languages)").parents().next().toString();
 					String education = doc1.select("p>strong:contains(Education)").parents().next().toString();
@@ -157,11 +157,8 @@ public class MainController {
 							.select("p>strong:contains(Other criteria or requirements)").parents().next().toString();
 					String purpose = doc.select("p>strong:contains(purpose)").parents().next().toString();
 
-					
-					
-					
 //					String education1 = doc1.select("p:matchesOwn((?i)education)").next().toString();
-					String languages1 = doc1.select("p:matchesOwn((?i)languages)").next().toString();   //asi netreba
+					String languages1 = doc1.select("p:matchesOwn((?i)languages)").next().toString(); // asi netreba
 //					String experience1 = doc1.select("p:matchesOwn((?i)experience)").next().toString();
 
 //					System.out.println("******************************************************");
@@ -170,13 +167,16 @@ public class MainController {
 
 //					String others1 = doc1.select("p:matchesOwn((?i)others)").next().toString();
 //					String accountabilities1 = doc.select("p:matchesOwn((?i)accountabilities)").next().toString();
-					//String language1 = doc1.select("p:matchesOwn((?i)language)").next().toString();
-					
-					String experiences1 = doc1.select("p:matchesOwn((?i)experiences)").next().toString();   // asi netreba
-					
-	//				String generalDescription1 = doc.select("p:matchesOwn((?i)general description)").next().toString();
+					// String language1 =
+					// doc1.select("p:matchesOwn((?i)language)").next().toString();
+
+					String experiences1 = doc1.select("p:matchesOwn((?i)experiences)").next().toString(); // asi netreba
+
+					// String generalDescription1 = doc.select("p:matchesOwn((?i)general
+					// description)").next().toString();
 //					String softSkills1 = doc1.select("p:matchesOwn((?i)soft Skills)").next().toString();
-				String iTTechnicalSkills1 = doc1.select("p:matchesOwn((?i)IT Technical Skills)").next().toString(); //asi netreba
+					String iTTechnicalSkills1 = doc1.select("p:matchesOwn((?i)IT Technical Skills)").next().toString(); // asi
+																														// netreba
 //					String technicalSkills1 = doc1.select("p:matchesOwn((?i)Technical Skills)").next().toString();
 //					String yourSkills1 = doc1.select("p:matchesOwn((?i)Your skills)").next().toString();
 //					String otherCriteriaOrRequirements1 = doc1.select("p:matchesOwn((?i)Other criteria or requirements)").next().toString();
@@ -193,26 +193,8 @@ public class MainController {
 					String yourSkills1 = findElement(doc1, "Your Skills");
 					String otherCriteriaOrRequirements1 = findElement(doc1, "Other criteria or requirements");
 					String purpose1 = findElement(doc1, "Purpose");
-					
-					
 
-					
-					
-					
-					
-					
-					
-					
-					jobDescription = Jsoup.parse(jobDescription).text();
-					jobDescription = jobDescription.replaceAll("General description/ Purpose", "");
-					jobDescription = jobDescription.replaceAll("General description/", "");
-					jobDescription = jobDescription.replaceAll("General description", "");
-					jobDescription = jobDescription.replaceAll("General Description/ Purpose", "");
-					jobDescription = jobDescription.replaceAll("General Description/", "");
-					jobDescription = jobDescription.replaceAll("General Description", "");
-					jobDescription = jobDescription.replaceAll("Purpose", "");
-					jobDescription = jobDescription.replaceAll("•", "");
-					jobDescription = jobDescription.substring(0, 150).trim() + "...";
+					jobDescription = jobDescriptionFinal(jobDescription);
 
 					publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
 					JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
@@ -266,11 +248,30 @@ public class MainController {
 
 	}
 
+	private String jobDescriptionFinal(String jobDescription) {
+		jobDescription = Jsoup.parse(jobDescription).text();
+		jobDescription = jobDescription.replaceAll("General description/ Purpose", "");
+		jobDescription = jobDescription.replaceAll("General description/", "");
+		jobDescription = jobDescription.replaceAll("General description", "");
+		jobDescription = jobDescription.replaceAll("General Description/ Purpose", "");
+		jobDescription = jobDescription.replaceAll("General Description/", "");
+		jobDescription = jobDescription.replaceAll("General Description", "");
+		jobDescription = jobDescription.replaceAll("Purpose", "");
+		jobDescription = jobDescription.replaceAll("•", "");
+		jobDescription = jobDescription.substring(0, 150);
+		for (int i = jobDescription.length() - 1; i > 0; i--) {
+			if ((jobDescription.charAt(i)) == ' ') {
+				return (jobDescription.substring(0, i).trim() + "...");
+			}
+		}
+		return jobDescription;
+	}
+
 	private void findElementWhenTextIsInStrong(Document doc, String text) {
 		if (doc.select("p>strong:contains(" + text + ")").text().length() > (text.length() + 10)) {
 
 			System.out.println("-------------------------------------------");
-			System.out.println(doc.select("p>strong:contains("+ text + ")").toString());
+			System.out.println(doc.select("p>strong:contains(" + text + ")").toString());
 			System.out.println("-------------------------------------------");
 
 		}
@@ -279,9 +280,9 @@ public class MainController {
 
 	private String findElement(Document doc, String text) {
 		if (doc.select("p:matchesOwn((?i)" + text + ")").text().length() > (text.length() + 10)) {
-			return (doc.select("p:matchesOwn((?i)" + text +  ")").text().toString());
+			return (doc.select("p:matchesOwn((?i)" + text + ")").text().toString());
 		} else {
-			return (doc.select("p:matchesOwn((?i)" + text +  ")").next().text().toString());
+			return (doc.select("p:matchesOwn((?i)" + text + ")").next().text().toString());
 		}
 	}
 
