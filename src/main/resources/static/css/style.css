@@ -6,12 +6,14 @@
 
 *{
 	font-family: 'Roboto', sans-serif;
+	color: rgba(255,255,255, .7) !important; 
 }
 body{
 	background: url('../img/woodbg.jpg');
 	background-size: cover;
 	overflow: hidden;
 	font-size: 100%;
+	
 }
 .col-6{
 	padding: 1.5em;
@@ -35,7 +37,7 @@ h1{
 	text-align: center;
 	margin-top: 0.1em;
 	margin-bottom:0;
-	color: white;
+	color: rgba(255,255,255, .9);
 	font-size: 4.5em;
 }
 h4{
@@ -48,9 +50,13 @@ h4{
 } 
 
 .currentoffers{
-	color: #e20074;
+	color: #e20074 !important;
 	font-weight: bold;
 }
+.currentoffers > span{
+	color: #e20074 !important;
+}
+
 
 /*
 **------------------------------------
@@ -60,7 +66,7 @@ h4{
 
 .first{
 	font-size: 1.5em;
-	color:#e20074;
+	color:#e20074 !important;
 }
 .first-row th{
 	padding: 0.5em;
@@ -141,7 +147,7 @@ p,li{
 }
 h2{
 	text-transform: uppercase;
-	color: #e20074;
+	color: #e20074 !important;
 	font-weight: bold;
 	margin-left: 0.5em;
 }
@@ -149,11 +155,13 @@ h3{
 	background: #e20074;
 	padding: 0.6em;
 	font-size: 2em;
+	color: rgba(255,255,255, .7);
 }
 .qr-code-img{
 	width: 12em;
 	margin-left: 11em;
     margin-top: -4em;
+    opacity: .7;
 }
 
 .qrInfo{
