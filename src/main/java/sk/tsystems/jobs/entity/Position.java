@@ -1,10 +1,7 @@
 package sk.tsystems.jobs.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
@@ -27,14 +24,12 @@ public class Position {
 	private String positionBenefitname;
 	private String salary;
 	private String qrCodeImage;
-	
-	public String getSalary() {
-		return salary;
-	}
+	@Column(length = 10000)
+	private String jobDescriptionFull;
 
 	public Position(int ident, String jobId, String positionTitle, String jobDescription, String requirementDescription,
 			String employmentType, String positionURI, String applicationDeadline, String publicationStartDate,
-			String positionBenefitname, String salary, String qrCodeImage) {
+			String positionBenefitname, String salary, String qrCodeImage, String jobDescriptionFull) {
 
 		this.ident = ident;
 		this.jobId = jobId;
@@ -48,16 +43,12 @@ public class Position {
 		this.positionBenefitname = positionBenefitname;
 		this.salary = salary;
 		this.qrCodeImage = qrCodeImage;
-		
+		this.jobDescriptionFull = jobDescriptionFull;
 
 	}
 
 	public Position() {
 
-	}
-
-	public void setSalary(String salary) {
-		this.salary = salary;
 	}
 
 	public int getIdent() {
@@ -132,6 +123,14 @@ public class Position {
 		this.publicationStartDate = publicationStartDate;
 	}
 
+	public String getPositionBenefitname() {
+		return positionBenefitname;
+	}
+
+	public void setPositionBenefitname(String positionBenefitname) {
+		this.positionBenefitname = positionBenefitname;
+	}
+
 	public String getQrCodeImage() {
 		return qrCodeImage;
 	}
@@ -139,6 +138,21 @@ public class Position {
 	public void setQrCodeImage(String qrCodeImage) {
 		this.qrCodeImage = qrCodeImage;
 	}
-	
-	
+
+	public String getJobDescriptionFull() {
+		return jobDescriptionFull;
+	}
+
+	public void setJobDescriptionFull(String jobDescriptionFull) {
+		this.jobDescriptionFull = jobDescriptionFull;
+	}
+
+	public String getSalary() {
+		return salary;
+	}
+
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+
 }

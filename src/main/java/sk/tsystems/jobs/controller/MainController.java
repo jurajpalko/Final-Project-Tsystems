@@ -1,7 +1,7 @@
 package sk.tsystems.jobs.controller;
 
 import java.io.BufferedReader;
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,9 +13,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,12 +27,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
-import org.springframework.scheduling.annotation.EnableScheduling;
+
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -91,12 +89,6 @@ public class MainController {
 
 			JSONArray allJobs = (JSONArray) searchResult.get("SearchResultItems");
 
-			// DELETING CONTENT OF IMG/QRs FOLDER
-			// Arrays.stream(new
-			// File("src/main/resources/static/img/QRs/").listFiles()).forEach(File::delete);
-			// System.out.println("Images Deleted");
-			//
-
 			int numberOfDeletedRows = positionService.deleteAllFromTable();
 			clearSavedData(numberOfDeletedRows);
 			int ident = 1;
@@ -113,6 +105,7 @@ public class MainController {
 				String positionBenefitname = null;
 				String salary = null;
 				String qrCodeImage = null;
+				String jobDescriptionFull = null;
 
 				JSONObject job = (JSONObject) allJobs.get(i);
 				JSONObject matchedObjectDescriptor = (JSONObject) job.get("MatchedObjectDescriptor");
@@ -120,22 +113,19 @@ public class MainController {
 				positionTitle = (String) matchedObjectDescriptor.get("PositionTitle");
 				JSONObject userArea = (JSONObject) matchedObjectDescriptor.get("UserArea");
 				jobDescription = (String) userArea.get("TextJobDescription");
+				jobDescriptionFull = jobDescriptionFull(jobDescription);
 
 				if (jobDescription != null) {
 
 					requirementDescription = (String) userArea.get("TextRequirementDescription");
 					salary = findSalary(requirementDescription, jobDescription);
 
-					jobDescription = jobDescription.replaceAll("<p>&nbsp;</p>", "");
-					jobDescription = jobDescription.replaceAll("<p> </p>", "");
-					Document docJobDescription = Jsoup.parse(jobDescription);
+					
 
 					requirementDescription = (String) userArea.get("TextRequirementDescription");
 					requirementDescription = requirementDescription.replaceAll("<p>&nbsp;</p>", "");
 					requirementDescription = requirementDescription.replaceAll("<p> </p>", "");
-					Document docRequirementDescription = Jsoup.parse(requirementDescription);
-
-					
+					requirementDescription = requirementDescription.replaceAll("<p></p>", "");
 
 					jobDescription = jobDescriptionFinal(jobDescription);
 
@@ -166,63 +156,51 @@ public class MainController {
 					} catch (IOException e) {
 						System.out.println("Could not generate QR Code, IOException :: " + e.getMessage());
 					}
-
 					Position p = new Position(ident, jobId, positionTitle, jobDescription, requirementDescription,
 							employmentType, positionURI, applicationDeadline, publicationStartDate, positionBenefitname,
-							salary, qrCodeImage);
+							salary, qrCodeImage, jobDescriptionFull);
 					positionService.addPosition(p);
-
-					// IDENT OF LAST ADDED POSITION
-					// int ident = p.getIdent();
-					//
-
-					// SAVING QR CODE OF THE POSITION
-
 					ident++;
-
 				}
 			}
 
 		}
 
 	}
+	
+	
+	private String jobDescriptionFull(String jobDescription) {
+		jobDescription = jobDescription.replaceAll("<p>&nbsp;</p>", "");
+		jobDescription = jobDescription.replaceAll("<p> </p>", "");
+		jobDescription = jobDescription.replaceAll("<p></p>", "");
+//		jobDescription = Jsoup.parse(jobDescription).text();
+		
+		return jobDescription;
+	}
 
 	private String jobDescriptionFinal(String jobDescription) {
+		
+		jobDescription = jobDescription.replaceAll("<p>&nbsp;</p>", "");
+		jobDescription = jobDescription.replaceAll("<p> </p>", "");
+		jobDescription = jobDescription.replaceAll("<p></p>", "");
 		jobDescription = Jsoup.parse(jobDescription).text();
-		jobDescription = jobDescription.replaceAll("General description/ Purpose", "");
-		jobDescription = jobDescription.replaceAll("General description/", "");
-		jobDescription = jobDescription.replaceAll("General description", "");
-		jobDescription = jobDescription.replaceAll("General Description/ Purpose", "");
-		jobDescription = jobDescription.replaceAll("General Description/", "");
-		jobDescription = jobDescription.replaceAll("General Description", "");
-		jobDescription = jobDescription.replaceAll("Purpose", "");
+		
+		jobDescription = jobDescription.replaceFirst("General description/ Purpose", "");
+		jobDescription = jobDescription.replaceFirst("General description/", "");
+		jobDescription = jobDescription.replaceFirst("General description", "");
+		jobDescription = jobDescription.replaceFirst("General Description/ Purpose", "");
+		jobDescription = jobDescription.replaceFirst("General Description/", "");
+		jobDescription = jobDescription.replaceFirst("General Description", "");
+		jobDescription = jobDescription.replaceFirst("Purpose", "");
 		jobDescription = jobDescription.replaceAll("•", "");
 		jobDescription = jobDescription.substring(0, 150);
+		
 		for (int i = jobDescription.length() - 1; i > 0; i--) {
 			if ((jobDescription.charAt(i)) == ' ') {
 				return (jobDescription.substring(0, i).trim() + "...");
 			}
 		}
 		return jobDescription;
-	}
-
-	private void findElementWhenTextIsInStrong(Document doc, String text) {
-		if (doc.select("p>strong:contains(" + text + ")").text().length() > (text.length() + 10)) {
-
-			System.out.println("-------------------------------------------");
-			System.out.println(doc.select("p>strong:contains(" + text + ")").toString());
-			System.out.println("-------------------------------------------");
-
-		}
-		// return "nejaky string";
-	}
-
-	private String findElement(Document doc, String text) {
-		if (doc.select("p:matchesOwn((?i)" + text + ")").text().length() > (text.length() + 10)) {
-			return (doc.select("p:matchesOwn((?i)" + text + ")").text().toString());
-		} else {
-			return (doc.select("p:matchesOwn((?i)" + text + ")").next().text().toString());
-		}
 	}
 
 	private String findSalary(String str1, String str2) {
@@ -251,22 +229,6 @@ public class MainController {
 		return null;
 	}
 
-	private static String deleteAllFrom(String mainString, String subString) {
-		String subStringUpperCase = subString.toUpperCase();
-		if (mainString != null) {
-			String mainStringUpperCase = mainString.toUpperCase();
-			int positionOfSubstring = mainStringUpperCase.indexOf(subStringUpperCase);
-			if (positionOfSubstring != -1) {
-				mainString = mainString.substring(0, positionOfSubstring);
-				int positionOfpstrong = mainString.lastIndexOf("<p><strong>");
-				if (positionOfpstrong != -1) {
-					mainString = mainString.substring(0, positionOfpstrong);
-				}
-			}
-		}
-		return mainString;
-	}
-
 	private static String selectAllFrom(String mainString, String subString) {
 
 		String subStringUpperCase = subString.toUpperCase();
@@ -275,7 +237,6 @@ public class MainController {
 			int positionOfSubstring = mainStringUpperCase.indexOf(subStringUpperCase);
 			if (positionOfSubstring != -1) {
 				subString = mainString.substring(positionOfSubstring);
-				subString = "<p><strong>" + subString;
 				return subString;
 			}
 		}
@@ -363,7 +324,7 @@ public class MainController {
 			IOUtils.copy(in, os);
 		}
 	}
-	
+
 }
 
 //  selected data by jsoup
@@ -389,7 +350,7 @@ public class MainController {
 //	String purpose = docJobDescription.select("p>strong:contains(purpose)").parents().next().toString();
 //  
 //  selected data by regular expression if description is inside p element
-	
+
 //	String education1 = docRequirementDescription.select("p:matchesOwn((?i)education)").next().toString();
 //	String languages1 = docRequirementDescription.select("p:matchesOwn((?i)languages)").next().toString(); 
 //	String experience1 = docRequirementDescription.select("p:matchesOwn((?i)experience)").next().toString();
@@ -406,7 +367,7 @@ public class MainController {
 //	String purpose1 = docJobDescription.select("p:matchesOwn((?i)Purpose)").next().toString();
 //
 //	selected data by findElement method
-	
+
 //	String language1 = findElement(docRequirementDescription, "language");
 //	String education1 = findElement(docRequirementDescription, "education");
 //	String experience1 = findElement(docRequirementDescription, "experience");
@@ -419,3 +380,44 @@ public class MainController {
 //	String otherCriteriaOrRequirements1 = findElement(docRequirementDescription, "Other criteria or requirements");
 //	String purpose1 = findElement(docRequirementDescription, "Purpose");
 
+//private void findElementWhenTextIsInStrong(Document doc, String text) {
+//	if (doc.select("p>strong:contains(" + text + ")").text().length() > (text.length() + 10)) {
+//
+//		System.out.println("-------------------------------------------");
+//		System.out.println(doc.select("p>strong:contains(" + text + ")").toString());
+//		System.out.println("-------------------------------------------");
+//
+//	}
+//	// return "nejaky string";
+//}
+//
+//private String findElement(Document doc, String text) {
+//	if (doc.select("p:matchesOwn((?i)" + text + ")").text().length() > (text.length() + 10)) {
+//		return (doc.select("p:matchesOwn((?i)" + text + ")").text().toString());
+//	} else {
+//		return (doc.select("p:matchesOwn((?i)" + text + ")").next().text().toString());
+//	}
+//}
+
+//private static String deleteAllFrom(String mainString, String subString) {
+//	String subStringUpperCase = subString.toUpperCase();
+//	if (mainString != null) {
+//		String mainStringUpperCase = mainString.toUpperCase();
+//		int positionOfSubstring = mainStringUpperCase.indexOf(subStringUpperCase);
+//		if (positionOfSubstring != -1) {
+//			mainString = mainString.substring(0, positionOfSubstring);
+//			int positionOfpstrong = mainString.lastIndexOf("<p><strong>");
+//			if (positionOfpstrong != -1) {
+//				mainString = mainString.substring(0, positionOfpstrong);
+//			}
+//		}
+//	}
+//	return mainString;
+//}
+
+//Document docJobDescription = Jsoup.parse(jobDescription);
+//Document docRequirementDescription = Jsoup.parse(requirementDescription);
+
+//IDENT OF LAST ADDED POSITION
+// int ident = p.getIdent();
+// SAVING QR CODE OF THE POSITION
