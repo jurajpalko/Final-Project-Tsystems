@@ -118,16 +118,10 @@ public class MainController {
 				if (jobDescription != null) {
 
 					requirementDescription = (String) userArea.get("TextRequirementDescription");
-					salary = findSalary(requirementDescription, jobDescription);
-
+					requirementDescription = requirementDescriptionFinal(requirementDescription);
 					
-
-					requirementDescription = (String) userArea.get("TextRequirementDescription");
-					requirementDescription = requirementDescription.replaceAll("<p>&nbsp;</p>", "");
-					requirementDescription = requirementDescription.replaceAll("<p> </p>", "");
-					requirementDescription = requirementDescription.replaceAll("<p></p>", "");
-
-					jobDescription = jobDescriptionFinal(jobDescription);
+					salary = findSalary(requirementDescription, jobDescription);
+					jobDescription = jobDescriptionShort(jobDescription);
 
 					publicationStartDate = (String) matchedObjectDescriptor.get("PublicationStartDate");
 					JSONArray positionSchedule = (JSONArray) matchedObjectDescriptor.get("PositionSchedule");
@@ -168,17 +162,24 @@ public class MainController {
 
 	}
 	
+	private String requirementDescriptionFinal(String requirementDescription) {
+		requirementDescription = requirementDescription.replaceAll("<p>&nbsp;</p>", "");
+		requirementDescription = requirementDescription.replaceAll("<p> </p>", "");
+		requirementDescription = requirementDescription.replaceAll("<p></p>", "");
+		requirementDescription = requirementDescription.replaceAll("•", "");
+		return requirementDescription;
+	}
 	
 	private String jobDescriptionFull(String jobDescription) {
 		jobDescription = jobDescription.replaceAll("<p>&nbsp;</p>", "");
 		jobDescription = jobDescription.replaceAll("<p> </p>", "");
 		jobDescription = jobDescription.replaceAll("<p></p>", "");
+		jobDescription = jobDescription.replaceAll("•", "");
 //		jobDescription = Jsoup.parse(jobDescription).text();
-		
 		return jobDescription;
 	}
 
-	private String jobDescriptionFinal(String jobDescription) {
+	private String jobDescriptionShort(String jobDescription) {
 		
 		jobDescription = jobDescription.replaceAll("<p>&nbsp;</p>", "");
 		jobDescription = jobDescription.replaceAll("<p> </p>", "");
