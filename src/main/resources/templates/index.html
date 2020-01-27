@@ -16,7 +16,7 @@
 		SHORT INTRODUCTION
 		NUMBER OF FREE POSITIONS 
 		CAROUSEL WITH 4 ITEMS -->
-			<section class="col-lg-6 col-sm-12 screen-one">
+			<section class="col-xl-6 col-md-12 screen-one">
 				<img class="mt-2 logotsystems" th:src="@{/img/t-systemslogo.svg}" alt="Logo T-Systems" />
 				<h1 class="text-center">Looking for a job ? </h1>	
 				<h4  class="text-center">We have <span class="currentoffers"><span th:text="${@mainController.countOffers}"></span> offers  </span>in Košice for you. Everyone has an opportunity with us.</h4>
@@ -26,13 +26,13 @@
 				    	<img th:src="@{/img/TechnicalPosition.png}" class="w-100" alt="Technical Position" />
 				    </div>
 				    <div class="carousel-item">
-				    	<img th:src="@{/img/ProcessPosition.png}" class=" w-100" alt="ProcessPosition" />
+				    	<img th:src="@{/img/ProcessPosition.png}" class="w-100" alt="ProcessPosition" />
 				    </div>
 				    <div class="carousel-item">
-				     	<img th:src="@{/img/ProjectPosition.png}" class=" w-100" alt="ProjectPosition" />
+				     	<img th:src="@{/img/ProjectPosition.png}" class="w-100" alt="ProjectPosition" />
 				    </div>
 				    <div class="carousel-item">
-				    	<img th:src="@{/img/OtherPosition.png}" class=" w-100" alt="OtherPosition" />
+				    	<img th:src="@{/img/OtherPosition.png}" class="w-100" alt="OtherPosition" />
 				    </div>
 				  </div>
 				</div>
@@ -41,7 +41,7 @@
 			<!-- SECOND SCREEN
 			SHORT INFO LIST OF ALL POSITIONS DISPLAYING 10 AT A TIME
 			WITH TITLE, CONTRACT TYPE AND POST DATE -->
-			<section class="col-lg-6 col-sm-12 screen-two">
+			<section class="col-xl-6 col-md-12 screen-two">
 				<table class="table table-striped table-dark">
 					<thead>
 						<tr class="first-row">
@@ -66,19 +66,19 @@
 		
 		<!-- SCREEN THREE AND SCREEN FOUR
 		MORE DETAILED INFO OF ONE OF THE POSITIONS ON ONE SCREEN -->
-			<section th:each="position,iterStat : ${@mainController.all}" class="col-6 screens">
+			<section th:each="position,iterStat : ${@mainController.all}" class="col-xl-6 screens">
 
-				<div class="container-fluid">
+				<div class="container-fluid small-screen">
 				<h3  th:text="${position.positionTitle}"></h3>
 					<div class="row">
-						<div class="card  mb-3 col-6">
+						<div class="card  mb-3 col-xl-6">
 						<!-- REQUIREMENTS -->
 							<h2>Requirements</h2>
 								<div class="card-body select-requirements">
 									<p class="card-text"><span th:utext="${position.requirementDescription}"></span></p>
 								</div> 
 						</div>	
-						 <div class="card  mb-3 col-6">
+						 <div class="card  mb-3 col-xl-6">
 						 <!-- JOB DESCRIPTION -->
 						 <h2>Job description</h2>
 							<div class="card-body select-jobdescription">

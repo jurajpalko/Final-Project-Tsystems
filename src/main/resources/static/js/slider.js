@@ -103,7 +103,7 @@ function showSlides() {
 	}
 
 	// TIME FOR ONE STEP AND SELF CALL
-	setTimeout(showSlides, 5000);
+	setTimeout(showSlides, 1000);
 }
 
 

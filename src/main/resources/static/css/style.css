@@ -4,20 +4,20 @@
 **----------------------------
 */
 
+
 *{
 	font-family: 'Roboto', sans-serif;
-	color: rgba(255,255,255, .8) !important; 
 }
 body{
 	background: url('../img/woodbg.jpg');
 	background-size: cover;
-	/*overflow: hidden;*/
+	color: rgba(255,255,255, .8);
 	font-size: 100%;
 
 
 	
 }
-.col-lg-6{
+.col-xl-6{
 	padding: 1.5em;
 	padding-bottom: 0.2em;
 	}
@@ -25,7 +25,7 @@ body{
 	background: rgba(0,0,0,0.8);
 }
 
-.col-6.screen-three, .col-6.screen-four{
+.col-xl-6.screen-three, .col-xl-6.screen-four{
 	padding: 0.5em;
 	padding-bottom: 1.3em;
 }
@@ -92,13 +92,13 @@ tbody td{
 	
 
 }
-thead th:last-child{
+ thead th:last-child{
 	width: 200px;	
 }
 thead th:nth-child(2){
 	width: 200px;
 	
-}
+} 
 
 /*
 **----------------------------
@@ -137,6 +137,8 @@ thead th:nth-child(2){
 	overflow:hidden; 
 }
 
+h2{
+	font-size: 2em;}
 h3 strong{
 	color: #e20074;
 }
@@ -178,7 +180,6 @@ h3{
 }
 p>strong{
 	color: #e20074;
-	font-size: 2em;
 }
 
 strong{
@@ -208,13 +209,23 @@ right: 0;
 **      MEDIA QUERIES - DISPLAY 3 x 3
 **----------------------------
 */
+@media  (max-width: 2500px){
+	
+	.screen-one{
+		width: 100%;
+	}
+	
+	
+	.small-screen{
+	display: none;}
+	
+}
 
 @media (min-width: 2600px){
 	body{
 	font-size: 190%;
 	}
-	h2{
-	font-size: 2em;}
+	
 	thead th:last-child{
 		width: 300px;	
 	}
@@ -223,12 +234,7 @@ right: 0;
 		
 	}
 }
-@media (max-width: 542px){
-	
-	.screen-three, .screen-four{
-	display: none;
-	}
-}
+
 
 
 
