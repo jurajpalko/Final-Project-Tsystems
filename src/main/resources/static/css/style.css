@@ -81,7 +81,6 @@ thead{
 	background: #E20074;
 }
 thead th{
-	color: white;
 	font-size: 2em;
 }
 .table-dark{
@@ -89,6 +88,7 @@ thead th{
 }
 tbody td{
 	font-size: 1.5em;
+	color: rgba(255,255,255, .8);
 	
 
 }
@@ -137,18 +137,24 @@ thead th:nth-child(2){
 	overflow:hidden; 
 }
 
+b{
+	color: #e20074;
+}
 h2{
 	font-size: 2em;}
 h3 strong{
 	color: #e20074;
 }
-p,li{
-	color: white;
+
+p>strong{
+	color: #e20074;
 }
+
 .title {
 	color: #e20074;
 	font-size: 1.5em;
 }
+
 h2{
 	text-transform: uppercase;
 	color: #e20074 !important;
@@ -163,7 +169,7 @@ h3{
 }
 .qr-code-img{
 	width: 12em;
-	margin-left: 11em;
+	margin-left: 21em;
     margin-top: -4em;
     opacity: .8;
 }
@@ -171,17 +177,30 @@ h3{
 .qrInfo{
 	position: relative;
 	right: -10.7em;
-	top: 13.5em;
+	top: 10.5em;
 }
+
+section:nth-child(5) > div > div > div:nth-child(1) > div > p:nth-child(7),
+section:nth-child(6) > div > div > div:nth-child(1) > div > p:nth-child(3),
+section:nth-child(7) > div > div > div:nth-child(1) > div > p:nth-child(3),
+section:nth-child(9) > div > div > div:nth-child(1) > div > p:nth-child(1), 
+section:nth-child(9) > div > div > div:nth-child(1) > div > p:nth-child(5),
+section:nth-child(10) > div > div > div:nth-child(1) > div > p:nth-child(3),
+section:nth-child(10) > div > div > div:nth-child(1) > div > p:nth-child(1),
+section:nth-child(13) > div > div > div:nth-child(1) > div > p:nth-child(3),
+section:nth-child(13) > div > div > div:nth-child(1) > div > p:nth-child(5),
+section:nth-child(22) > div > div > div:nth-child(1) > div > p:nth-child(3),
+section:nth-child(23) > div > div > div:nth-child(1) > div > p:nth-child(3),
+section:nth-child(5) > div > div > div:nth-child(1) > div > p:nth-child(7)
+{
+	color: #e20074;
+}
+body > div:nth-child(2) > div > section:nth-child(9) > div > div > div:nth-child(1) > div > p:nth-child(5)
 
 .qrsection{
 	margin-left: -3em;
 	margin-top: 1em;
 }
-p>strong{
-	color: #e20074;
-}
-
 strong{
 	font-weight: normal;
 }
@@ -194,7 +213,7 @@ body > div:nth-child(2) > div > section:nth-child(14) > div > div > strong > div
 	flex: 0 0 100%;
     max-width: 100%;
 }
-.screens{
+/* .screens{
 	position: absolute;
 }
 .screen-three{
@@ -202,7 +221,7 @@ left: 0;
 }
 .screen-four{
 right: 0;
-} 
+}  */
 
 /*
 **----------------------------
