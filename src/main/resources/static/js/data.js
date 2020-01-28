@@ -11,60 +11,12 @@ var salary2 = $('p:contains(basic wage)');
 
 $(".select-requirements p").filter(function() {
 	// Matches exact string   
-	return $(this).text() === "Education"
+	return $(this).text() === "Education" || $(this).text() === "Education:" || 
+	$(this).text() === "Experience"  || $(this).text() === "Experiences" || $(this).text() === "Language" ||  
+	$(this).text() === "Languages"|| $(this).text() === "Others" || $(this).text() === "Soft Skills" || 
+	$(this).text() === "Soft skills" || $(this).text() === "Certification" || $(this).text() === "IT Technical Skills" ||
+	$(this).text() === "We expect from you:"
 }).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "Education:"
-}).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "Experience";
-}).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "Experiences";
-}).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "Language";
-}).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "Languages";
-}).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "Languages:";
-}).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "Others";
-}).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "Soft Skills";
-}).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "Soft skills";
-}).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "Certification";
-}).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "IT Technical Skills";
-}).css({"color":"#E20074"});
-$(".select-requirements p").filter(function() {
-	// Matches exact string   
-	return $(this).text() === "We expect from you:";
-}).css({"color":"#E20074"});
-
-
-
-
 
 
 //Find all elements by paragraf	
