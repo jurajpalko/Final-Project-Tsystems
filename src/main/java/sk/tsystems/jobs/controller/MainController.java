@@ -72,6 +72,12 @@ public class MainController {
 		
 		return "about";
 	}
+	
+	@RequestMapping("/benefits")
+	public String benefits() {
+
+		return "benefits";
+	}
 
 	@Autowired
 	private PositionService positionService;
