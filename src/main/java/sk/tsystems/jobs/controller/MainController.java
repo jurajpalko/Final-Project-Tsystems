@@ -217,7 +217,7 @@ public class MainController {
 
 	private String salaryRegExp(String salary) {
 		if (salary != null) {
-			Pattern pattern = Pattern.compile("(.*)+([0-9]){3,4}(.*)");
+			Pattern pattern = Pattern.compile("(\\D)+([0-9]){3,4}(.*)");
 			Matcher matcher = pattern.matcher(salary);
 			if (matcher.matches()) {
 				int beggining = matcher.end(1);
