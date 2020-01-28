@@ -14,7 +14,7 @@ $(".select-requirements p").filter(function() {
 	return $(this).text() === "Education" || $(this).text() === "Education:" || 
 	$(this).text() === "Experience"  || $(this).text() === "Experiences" || $(this).text() === "Language" ||  
 	$(this).text() === "Languages"|| $(this).text() === "Others" || $(this).text() === "Soft Skills" || 
-	$(this).text() === "Soft skills" || $(this).text() === "Certification" || $(this).text() === "IT Technical Skills" ||
+	$(this).text() === "Soft skills" || $(this).text() === "Certification" || $(this).text() === "IT Technical Skills" || $(this).text() === "Technical Skills"||
 	$(this).text() === "We expect from you:"
 }).css({"color":"#E20074"});
 

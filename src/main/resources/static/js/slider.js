@@ -45,7 +45,7 @@ function showSlides() {
 		slides[0].parentNode.removeChild(slides[0]);
 		document.getElementById("positionsTable").appendChild(first);
 		slides[10 - 1].style.display = "table-row";
-		setTimeout(showSlides, 500);
+		setTimeout(showSlides, 2000);
 	}
 
 	positionSlider();
