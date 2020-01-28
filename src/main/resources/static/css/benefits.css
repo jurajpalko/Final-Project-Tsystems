@@ -263,6 +263,9 @@ right: 0;
 **      BENEFITS
 **----------------------------
 */
+.container-fluid {
+	padding: 0.5em;
+}
 .benefits {
 	background: rgba(0,0,0,0.8);
 }
@@ -287,7 +290,7 @@ right: 0;
 }
 .benefits p {
     font-family: 'Roboto',sans-serif;
-    font-size: 0.875em;
+    font-size: 1.2em;
     font-weight: 300;
     line-height: 1.5em;
     display: block;
@@ -315,7 +318,7 @@ right: 0;
 	width: 65.625em;
 }
 .benefit {
-	padding: 2em 0em 2em 1em
+	padding: 1.1em 0em 1.1em 1em
 }
 .grey {
  	background: rgba(255,255,255,0.1);
