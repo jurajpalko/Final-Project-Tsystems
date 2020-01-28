@@ -64,10 +64,10 @@ function positionSlider() {
 
 	if (slides.length < 3) {
 		screens[0].style.display = "block";
-		screens[0].className = "col-6 screen-three screens";
+		screens[0].className = "col-xl-6 screen-three screens";
 
 		screens[1].style.display = "block";
-		screens[1].className = "col-6 screen-four screens";
+		screens[1].className = "col-xl-6 screen-four screens";
 
 	} else {
 
@@ -76,11 +76,11 @@ function positionSlider() {
 			screens[screens.length - 2].style.display = "none";
 			if (side == true) {
 				screens[screens.length - 2].className = "screens"
-				screens[e].className = "col-6 screen-three screens";
+				screens[e].className = "col-xl-6 screen-three screens";
 				side = false;
 			} else {
 				screens[screens.length - 2].className = "screens"
-				screens[e].className = "col-6 screen-four screens";
+				screens[e].className = "col-xl-6 screen-four screens";
 				side = true;
 			}
 			e++;
@@ -89,11 +89,11 @@ function positionSlider() {
 			screens[screens.length - 1].style.display = "none";
 			if (side == true) {
 				screens[screens.length - 1].className = "screens"
-				screens[e].className = "col-6 screen-three screens";
+				screens[e].className = "col-xl-6 screen-three screens";
 				side = false;
 			} else {
 				screens[screens.length - 1].className = "screens"
-				screens[e].className = "col-6 screen-four screens";
+				screens[e].className = "col-xl-6 screen-four screens";
 				side = true;
 			}
 			e++;
@@ -102,11 +102,11 @@ function positionSlider() {
 			screens[e - 2].style.display = "none";
 			if (side == true) {
 				screens[e - 2].className = "screens"
-				screens[e].className = "col-6 screen-three screens";
+				screens[e].className = "col-xl-6 screen-three screens";
 				side = false;
 			} else {
 				screens[e - 2].className = "screens"
-				screens[e].className = "col-6 screen-four screens";
+				screens[e].className = "col-xl-6 screen-four screens";
 				side = true;
 			}
 			e++;
