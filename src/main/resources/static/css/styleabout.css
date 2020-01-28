@@ -1,0 +1,39 @@
+* {
+	padding: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+}
+.cm-media cm-media--responsive a-image {
+	align-left: 3em;
+}
+
+.tsystem {
+	color: white !important;
+	size: 2em;
+	/* color: #e20074 !important ;*/
+}
+
+/* .description {
+	background-color: #e20074;
+} */
+.row {
+	padding-bottom: 0.5em;
+	background: rgba(0,0,0,0.8);
+}
+.rowDark{
+	background: rgba(255, 255, 255, 0.1);
+	
+}
+
+.magenta {
+	color: #e20074 !important;
+}
+
+.description {
+	background: rgba(0,0,0,0.8);
+}
+
+.third-picture{
+	padding-top:2em;
+}

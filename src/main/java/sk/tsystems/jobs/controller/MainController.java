@@ -66,6 +66,12 @@ public class MainController {
 		update();
 		return "index";
 	}
+	
+	@RequestMapping("/about")
+	public String second() {
+		
+		return "about";
+	}
 
 	@Autowired
 	private PositionService positionService;
