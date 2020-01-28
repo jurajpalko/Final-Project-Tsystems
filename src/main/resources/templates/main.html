@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job offers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+		
+		<!-- FIRST SCREEN
+		SHORT INTRODUCTION
+		NUMBER OF FREE POSITIONS 
+		CAROUSEL WITH 4 ITEMS -->
+			<section class="col-12 screen-one">
+				<img class="mt-2 logotsystems" th:src="@{/img/t-systemslogo.svg}" alt="Logo T-Systems" />
+				<h1 class="text-center">Looking for a job ? </h1>	
+				<h4  class="text-center">We have <span class="currentoffers"><span th:text="${@mainController.countOffers}"></span> offers  </span>in Košice for you. Everyone has an opportunity with us.</h4>
+				<div id="carouselControls" class="carousel slide" data-ride="carousel">
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				    	<img th:src="@{/img/TechnicalPosition.png}" class="w-100" alt="Technical Position" />
+				    </div>
+				    <div class="carousel-item">
+				    	<img th:src="@{/img/ProcessPosition.png}" class="w-100" alt="ProcessPosition" />
+				    </div>
+				    <div class="carousel-item">
+				     	<img th:src="@{/img/ProjectPosition.png}" class="w-100" alt="ProjectPosition" />
+				    </div>
+				    <div class="carousel-item">
+				    	<img th:src="@{/img/OtherPosition.png}" class="w-100" alt="OtherPosition" />
+				    </div>
+				  </div>
+				</div>
+			</section>
+			
+			<!-- SECOND SCREEN
+			SHORT INFO LIST OF ALL POSITIONS DISPLAYING 10 AT A TIME
+			WITH TITLE, CONTRACT TYPE AND POST DATE -->
+			<section class="col-12 screen-two">
+				<table class="table table-striped table-dark">
+					<thead>
+						<tr class="first-row">
+							<th>Job title</th>
+							<th>Salary</th>
+							<th>Deadline</th>
+						</tr>
+					</thead>
+					<tbody id="positionsTable">
+						<tr class="positionRow" th:each="position : ${@mainController.positionList}">
+							<td class="first" th:text="${position.positionTitle}"></td>
+							<td align="right" class="salary"><span th:text="${position.salary}"></span> €</td>
+								
+								<td><span class="format-date"  th:text="${position.applicationDeadline}"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script th:src="@{/js/slider2.js}"></script>
+		 <script th:src="@{/js/date.js}"></script> 
+		<script th:src="@{/js/data.js}"></script>
+</body>
+</html>
