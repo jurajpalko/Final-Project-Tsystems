@@ -13,9 +13,9 @@ public class Position {
 
 	private String jobId;
 	private String positionTitle;
-	@Column(length = 10000)
+	@Column(length = 15000)
 	private String jobDescription;
-	@Column(length = 10000)
+	@Column(length = 15000)
 	private String requirementDescription;
 	private String employmentType;
 	private String positionURI;
@@ -24,7 +24,7 @@ public class Position {
 	private String positionBenefitname;
 	private String salary;
 	private String qrCodeImage;
-	@Column(length = 10000)
+	@Column(length = 15000)
 	private String jobDescriptionFull;
 
 	public Position(int ident, String jobId, String positionTitle, String jobDescription, String requirementDescription,

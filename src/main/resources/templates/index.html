@@ -55,7 +55,7 @@
 							<td class="first" th:text="${position.positionTitle}"></td>
 							<td ><span class= "ml-3" th:text="${position.salary}"></span> €</td>
 								
-								<td><span class="format-date" th:if="${position.applicationDeadline} != null" th:text="${position.applicationDeadline} ? ${position.applicationDeadline} : 'not DD'"></span></td>
+								<td><span class="format-date"  th:text="${position.applicationDeadline}"></span></td>
 						</tr>
 					</tbody>
 				</table>

@@ -139,6 +139,7 @@ thead th:nth-child(2){
 
 b{
 	color: #e20074;
+	font-weight: normal;
 }
 h2{
 	font-size: 2em;}
@@ -168,19 +169,19 @@ h3{
 	color: rgba(255,255,255, .7);
 }
 .qr-code-img{
-	width: 12em;
-	margin-left: 21em;
-    margin-top: -4em;
+	width: 13em;
+	margin-left: 9em;
+    margin-top: 1em;
     opacity: .8;
 }
 
 .qrInfo{
 	position: relative;
-	right: -10.7em;
-	top: 10.5em;
+	left: 9em;
+	top: 16.5em;
 }
 
-section:nth-child(5) > div > div > div:nth-child(1) > div > p:nth-child(7),
+/* section:nth-child(5) > div > div > div:nth-child(1) > div > p:nth-child(7),
 section:nth-child(6) > div > div > div:nth-child(1) > div > p:nth-child(3),
 section:nth-child(7) > div > div > div:nth-child(1) > div > p:nth-child(3),
 section:nth-child(9) > div > div > div:nth-child(1) > div > p:nth-child(1), 
@@ -194,8 +195,7 @@ section:nth-child(23) > div > div > div:nth-child(1) > div > p:nth-child(3),
 section:nth-child(5) > div > div > div:nth-child(1) > div > p:nth-child(7)
 {
 	color: #e20074;
-}
-body > div:nth-child(2) > div > section:nth-child(9) > div > div > div:nth-child(1) > div > p:nth-child(5)
+} */
 
 .qrsection{
 	margin-left: -3em;
@@ -212,6 +212,9 @@ div > strong{
 body > div:nth-child(2) > div > section:nth-child(14) > div > div > strong > div{
 	flex: 0 0 100%;
     max-width: 100%;
+}
+.format-date{
+	text-transform: uppercase;
 }
 /* .screens{
 	position: absolute;
