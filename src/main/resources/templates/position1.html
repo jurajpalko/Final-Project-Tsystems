@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Position</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap&subset=latin-ext"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+
+			<section
+				th:each="position,iterStat : ${@mainController.positionList}"
+				th:class="${iterStat.even}?'col-12 displayed position':'col-12 none position'">
+
+
+				<div class="container-fluid">
+					<h3 th:text="${position.positionTitle}"></h3>
+					<div class="row">
+						<div class="card  mb-3 col-6">
+							<!-- REQUIREMENTS -->
+							<h2>Requirements</h2>
+							<div class="card-body select-requirements">
+								<p class="card-text">
+									<span th:utext="${position.requirementDescription}"></span>
+								</p>
+							</div>
+						</div>
+						<div class="card  mb-3 col-6">
+							<!-- JOB DESCRIPTION -->
+							<h2>Job description</h2>
+							<div class="card-body select-jobdescription">
+								<div class="text-job-description">
+									<p class="card-text">
+										<span th:utext="${position.jobDescription}"></span>
+									</p>
+								</div>
+								<div class="qrsection">
+									<!-- 	<div class= "qrInfo"> <p>FOR MORE INFO</p><p>SCAN THE CODE</p> </div> -->
+									<div class="qrInfo">
+										<p>SCAN FOR MORE</p>
+									</div>
+									<span th:utext="${position.qrCodeImage}"></span>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+
+	<!-- 		 <script th:src="@{/js/slider.js}"></script>  -->
+	<script th:src="@{/js/position.js}"></script>
+	<script th:src="@{/js/date.js}"></script>
+	<script th:src="@{/js/data.js}"></script>
+</body>
+</html>
+
+
+
+
+<!-- <div class="container-fluid"> -->
+<!-- <div class="row"> -->
+<!-- 	<section th:each="position,iterStat : ${@mainController.positionList}" th:class="${iterStat.even}?'col-12 displayed position screens':'col-12 none position screens'"> -->
+
+<!-- 				<div class="container-fluid small-screen"> -->
+<!-- 				<h3  th:text="${position.positionTitle}"></h3> -->
+<!-- 					<div class="row"> -->
+<!-- 						<div class="card mb-6 col-12"> -->
+<!-- 						REQUIREMENTS -->
+<!-- 							<h2>Requirements</h2> -->
+<!-- 								<div class="card-body select-requirements"> -->
+<!-- 									<p class="card-text"><span th:utext="${position.requirementDescription}"></span></p> -->
+<!-- 								</div>  -->
+<!-- 						</div>	 -->
+<!-- 						 <div class="card mb-6 col-12"> -->
+<!-- 						 JOB DESCRIPTION -->
+<!-- 						 <h2>Job description</h2> -->
+<!-- 							<div class="card-body select-jobdescription"> -->
+<!-- 								<div class="text-job-description"><p class="card-text"><span th:utext="${position.jobDescriptionFull}"></span></p>  </div> -->
+<!-- 								<div class="qrsection"> -->
+<!-- 								<div class= "qrInfo"> <p>FOR MORE INFO</p><p>SCAN THE CODE</p></div> -->
+<!-- 								<span th:utext="${position.qrCodeImage}"></span> -->
+
+<!-- 							</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</section> -->
+<!-- 	</div> -->
+<!-- 	</div> -->
