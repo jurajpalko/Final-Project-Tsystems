@@ -305,9 +305,7 @@ public class MainController {
 		}
 	}
 
-	public List<Position> getAll() {
-		return positionService.getAllPositions();
-	}
+	
 
 	public List<Position> getPositionList() {
 
@@ -324,7 +322,7 @@ public class MainController {
 
 	@RequestMapping(value = "/qrcode", method = RequestMethod.GET)
 	public void getQrCode(HttpServletResponse response, int number) throws IOException {
-		if (number > 0 && number <= getAll().size()) {
+		if (number > 0 && number <= getPositionList().size()) {
 			InputStream in = new FileInputStream(QR_FOLDER + number + ".png");
 			response.setContentType(MediaType.IMAGE_PNG_VALUE);
 			OutputStream os = response.getOutputStream();

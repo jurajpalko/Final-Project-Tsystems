@@ -67,7 +67,7 @@
 		
 		<!-- SCREEN THREE AND SCREEN FOUR
 		MORE DETAILED INFO OF ONE OF THE POSITIONS ON ONE SCREEN -->
-			<section th:each="position,iterStat : ${@mainController.all}" class="col-xl-6 screens">
+			<section th:each="position,iterStat : ${@mainController.positionList}" class="col-xl-6 screens">
 
 				<div class="container-fluid small-screen">
 				<h3  th:text="${position.positionTitle}"></h3>
