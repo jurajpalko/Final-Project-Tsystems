@@ -33,7 +33,7 @@
 .position{
 	padding-left: 0;
 	padding-right: 0;
-	margin-bottom: 4em;
+	margin-bottom: 3.5em;
 		background: rgba(255, 255, 255, 0.1);
 
 }
@@ -51,4 +51,8 @@
 
 .magenta {
 	color: #e20074 !important;
+}
+h2 {
+    
+    margin-top: .7em;
 }
