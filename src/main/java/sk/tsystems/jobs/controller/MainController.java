@@ -200,10 +200,10 @@ public class MainController {
 		jobDescription = jobDescription.replaceFirst("General Description", "");
 		jobDescription = jobDescription.replaceFirst("Purpose", "");
 		jobDescription = jobDescription.replaceAll("•", "");
-		jobDescription = jobDescription.substring(0, 150);
+		jobDescription = jobDescription.substring(0, 200);
 		
 		for (int i = jobDescription.length() - 1; i > 0; i--) {
-			if ((jobDescription.charAt(i)) == ' ') {
+			if (jobDescription.charAt(i) == ' ' || jobDescription.charAt(i) == '.'    || jobDescription.charAt(i) == ','    ) {
 				return (jobDescription.substring(0, i).trim() + "...");
 			}
 		}
