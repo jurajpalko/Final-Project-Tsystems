@@ -13,51 +13,63 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 <link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/position.css}" />
+<!-- <link rel="stylesheet" th:href="@{/css/styleabout.css}" /> -->
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="row">
-
-			<section
-				th:each="position,iterStat : ${@mainController.positionList}"
-				th:class="${iterStat.even}?'col-12 displayed position':'col-12 none position'">
 
 
-				<div class="container-fluid">
-					<h3 th:text="${position.positionTitle}"></h3>
-					<div class="row">
-						<div class="card  mb-3 col-6">
-							<!-- REQUIREMENTS -->
-							<h2>Requirements</h2>
-							<div class="card-body select-requirements">
+
+
+
+	<div class="container-fluid fullscreen">
+		<img class="mt-2 logotsystems" th:src="@{/img/t-systemslogo.svg}"
+			alt="Logo T-Systems" />
+
+		<!-- <p class= "title">Start up your personal growth with us.</p>
+ -->		<p class= "title">Find your place, enter the T-Systems world! </p>
+	<!-- 	<p class= "title">Find your place.</p> -->
+
+
+		<section th:each="position,iterStat : ${@mainController.positionList}"
+			th:class="${iterStat.even}?'col-12 displayed position':'col-12 none position'">
+
+
+			<div class="container-fluid">
+				<h3 th:text="${position.positionTitle}"></h3>
+				<div class="row">
+					<div class="card  mb-3 col-6">
+						<!-- REQUIREMENTS -->
+						<h2>Requirements</h2>
+						<div class="card-body select-requirements">
+							<p class="card-text">
+								<span th:utext="${position.requirementDescription}"></span>
+							</p>
+						</div>
+					</div>
+					<div class="card  mb-3 col-6">
+						<!-- JOB DESCRIPTION -->
+						<h2>Job description</h2>
+						<div class="card-body select-jobdescription">
+							<div class="text-job-description">
 								<p class="card-text">
-									<span th:utext="${position.requirementDescription}"></span>
+									<span th:utext="${position.jobDescription}"></span>
 								</p>
 							</div>
-						</div>
-						<div class="card  mb-3 col-6">
-							<!-- JOB DESCRIPTION -->
-							<h2>Job description</h2>
-							<div class="card-body select-jobdescription">
-								<div class="text-job-description">
-									<p class="card-text">
-										<span th:utext="${position.jobDescription}"></span>
-									</p>
+							<div class="qrsection">
+								<!-- 	<div class= "qrInfo"> <p>FOR MORE INFO</p><p>SCAN THE CODE</p> </div> -->
+								<div class="qrInfo">
+									<p>SCAN FOR MORE</p>
 								</div>
-								<div class="qrsection">
-									<!-- 	<div class= "qrInfo"> <p>FOR MORE INFO</p><p>SCAN THE CODE</p> </div> -->
-									<div class="qrInfo">
-										<p>SCAN FOR MORE</p>
-									</div>
-									<span th:utext="${position.qrCodeImage}"></span>
+								<span th:utext="${position.qrCodeImage}"></span>
 
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</section>
-		</div>
+			</div>
+		</section>
+
 	</div>
 
 

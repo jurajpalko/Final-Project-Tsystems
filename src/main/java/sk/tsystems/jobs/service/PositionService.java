@@ -9,7 +9,7 @@ public interface PositionService {
 	void addPosition(Position position);
 	
 	Position getPosition(int ident);
-	List<Position> getAllPositions();
+//	List<Position> getAllPositions();
 
 	int deleteAllFromTable();
 	
@@ -17,4 +17,5 @@ public interface PositionService {
 	List<Position> getPositionList();
 	
 	long getAllCountOffers();
+
 }

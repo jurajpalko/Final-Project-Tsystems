@@ -13,10 +13,19 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 <link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/position.css}" />
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="row">
+	
+	<div class="container-fluid fullscreen">
+		<img class="mt-2 logotsystems" th:src="@{/img/t-systemslogo.svg}"
+			alt="Logo T-Systems" />
+
+	
+		<p class= "title">Join us and start up your personal growth. </p>
+<!-- 		<p class= "title">Available positions </p> -->
+	
+	
 
 			<section
 				th:each="position,iterStat : ${@mainController.positionList}"
@@ -56,8 +65,8 @@
 					</div>
 				</div>
 			</section>
-		</div>
-	</div>
+	
+</div>
 
 
 

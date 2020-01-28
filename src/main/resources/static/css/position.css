@@ -1,0 +1,54 @@
+/* body {
+	padding: 0.5em;
+	padding-bottom: 0.5em;
+} */
+.tsystem {
+	color: white !important;
+	size: 2em;
+	/* color: #e20074 !important ;*/
+}
+
+
+.logotsystems {
+
+	padding-bottom: 3em;
+}
+
+.container-fluid {
+	padding-left: 0em;
+	padding-right: 0em;
+}
+
+.fullscreen {
+	padding: 2em;
+	padding-bottom: 0.5em;
+}
+
+.title{
+	color: white;
+	font-size: 3em;
+	text-align: center;
+	font-weight: 800;
+}
+.position{
+	padding-left: 0;
+	padding-right: 0;
+	margin-bottom: 4em;
+		background: rgba(255, 255, 255, 0.1);
+
+}
+
+.card{
+	height: 42em;
+	overflow: hidden;
+
+}
+
+.qrsection {
+    margin-left: -2em;
+    margin-top: 4em;
+}
+
+.magenta {
+	color: #e20074 !important;
+}
