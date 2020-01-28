@@ -32,8 +32,14 @@
 
 .description {
 	background: rgba(0,0,0,0.8);
+	padding-bottom: .5em;
+	margin-bottom: 1em;
 }
 
 .third-picture{
 	padding-top:2em;
+}
+
+.logotsystems{
+	padding-bottom: 2em;
 }
