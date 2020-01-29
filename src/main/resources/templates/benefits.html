@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap&subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/css/benefits.css}"/>
 </head>
 <body>
 <div class="container-fluid benefits">
 <img class="mt-2 logotsystems" th:src="@{/img/t-systemslogo.svg}" alt="Logo T-Systems" />
-<h3>Work benefits. A phrase you are going to come to love!</h3>
-<h4>It's not just about the money... Join in and get a range of attractive employer contributions, because your career matters to us!</h4>
+<h3 class="mb-4">Work benefits. A phrase you are going to come to love!</h3>
+<h4 class="mb-4">It's not just about the money... Join in and get a range of attractive employer contributions, because your career matters to us!</h4>
 
 <div class = "row">
 	<div class = "col-6 benefit grey">
@@ -59,11 +60,11 @@
 		<h5>Corporate events</h5>
 		<p>Experience the unique atmosphere of our events. Eat up the team spirit at T-Systems Slovakia for yourself and the humour, dance and joy of people who have magenta in their blood.</p>
 	</div>
-<div class = "col-6 benefit">
+<div class = "col-6 benefit ">
 	<div class = "icon">
 	<img th:src="@{/img/benefits/cafeteria.svg}"/>
 	</div>
-	<h5>“Cafeteria” system of benefits</h5>
+	<h5>Cafeteria</h5>
 	<p>Our high standard benefits system leaves the decision making up to you if you want to use your benefits on vacation, your health, sports...</p>
 </div>
 </div>
@@ -86,10 +87,10 @@
 </div>
 
 
-<div class = "row">
+<!-- <div class = "row">
 <div class = "col-12">
-<img class = "build" th:src="@{/img/benefits/tsys.jpg}"/>
-</div>
-</div>
+<img class = "w-100"  th:src="@{/img/benefits/tsys.jpg}"/>
+</div> -->
 </div>
 </body>
+</html>

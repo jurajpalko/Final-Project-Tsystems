@@ -89,12 +89,17 @@ public class MainController {
 		
 		return "position2";
 	}
+	@RequestMapping("/main")
+	public String main() {
+		
+		return "main";
+	}
 	@Autowired
 	private PositionService positionService;
 
 	private static final String QR_FOLDER = System.getProperty("java.io.tmpdir");
 
-	@Scheduled(fixedRate = 10000000)
+	@Scheduled(fixedRate = 86400000)
 	public void update() throws IOException, ParseException {
 
 		JSONObject jsonObject = null;
@@ -197,6 +202,8 @@ public class MainController {
 		jobDescription = jobDescription.replaceAll("<p> </p>", "");
 		jobDescription = jobDescription.replaceAll("<p></p>", "");
 		jobDescription = jobDescription.replaceAll("•", "");
+		
+		
 //		jobDescription = Jsoup.parse(jobDescription).text();
 		return jobDescription;
 	}
@@ -216,7 +223,7 @@ public class MainController {
 		jobDescription = jobDescription.replaceFirst("General Description", "");
 		jobDescription = jobDescription.replaceFirst("Purpose", "");
 		jobDescription = jobDescription.replaceAll("•", "");
-		jobDescription = jobDescription.substring(0, 200);
+		jobDescription = jobDescription.substring(0, 150);
 		
 		for (int i = jobDescription.length() - 1; i > 0; i--) {
 			if (jobDescription.charAt(i) == ' ' || jobDescription.charAt(i) == '.'    || jobDescription.charAt(i) == ','    ) {

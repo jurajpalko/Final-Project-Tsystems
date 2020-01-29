@@ -12,6 +12,7 @@ body{
 	background-size: cover;
 	color: rgba(255,255,255, .8);
 	font-size: 100%;
+	overflow: hidden;
 
 }
 .col-xl-6{
@@ -23,9 +24,9 @@ body{
 }
 
 .col-xl-6.screen-three, .col-xl-6.screen-four{
-	padding: 0.5em;
 	padding-bottom: 1.3em;
 }
+
 
 
 /*
@@ -137,7 +138,6 @@ thead th:nth-child(2){
 	height: 10.375em;
 	overflow:hidden; 
 }
-
 b{
 	color: #e20074;
 	font-weight: normal;
@@ -148,9 +148,9 @@ h3 strong{
 	color: #e20074;
 }
 
-p>strong{
+ p>strong{
 	color: #e20074;
-}
+} 
 
 .title {
 	color: #e20074;
@@ -170,37 +170,25 @@ h3{
 	color: rgba(255,255,255, .8);
 }
 .qr-code-img{
-	width: 13em;
-	margin-left: 9em;
-    margin-top: 1em;
+	width: 14em;
+	margin-left: 6em; 
+    margin-top: -2em; 
     opacity: .8;
 }
 
 .qrInfo{
 	position: relative;
-	left: 9em;
-	top: 16.5em;
+	left: 6.5em;
+	top: 15.5em;
 }
 
-/* section:nth-child(5) > div > div > div:nth-child(1) > div > p:nth-child(7),
-section:nth-child(6) > div > div > div:nth-child(1) > div > p:nth-child(3),
-section:nth-child(7) > div > div > div:nth-child(1) > div > p:nth-child(3),
-section:nth-child(9) > div > div > div:nth-child(1) > div > p:nth-child(1), 
-section:nth-child(9) > div > div > div:nth-child(1) > div > p:nth-child(5),
-section:nth-child(10) > div > div > div:nth-child(1) > div > p:nth-child(3),
-section:nth-child(10) > div > div > div:nth-child(1) > div > p:nth-child(1),
-section:nth-child(13) > div > div > div:nth-child(1) > div > p:nth-child(3),
-section:nth-child(13) > div > div > div:nth-child(1) > div > p:nth-child(5),
-section:nth-child(22) > div > div > div:nth-child(1) > div > p:nth-child(3),
-section:nth-child(23) > div > div > div:nth-child(1) > div > p:nth-child(3),
-section:nth-child(5) > div > div > div:nth-child(1) > div > p:nth-child(7)
-{
-	color: #e20074;
-} */
-
+.screens .container-fluid {
+	padding-left: 0;
+	padding-right: 0;
+}
 .qrsection{
-	margin-left: -3em;
-	margin-top: 1em;
+	margin-left: 2em;
+	margin-top: 4em;
 }
 strong{
 	font-weight: normal;
@@ -217,15 +205,16 @@ body > div:nth-child(2) > div > section:nth-child(14) > div > div > strong > div
 .format-date{
 	text-transform: uppercase;
 }
-  .screens{
+ .screens{
 	position: absolute;
+	padding-top: 0.2em;
 }
 .screen-three{
 left: 0;
 }
 .screen-four{
 right: 0;
-}  
+}     
 
 /*
 **----------------------------
@@ -246,7 +235,7 @@ right: 0;
 
 @media (min-width: 2600px){
 	body{
-	font-size: 190%;
+	font-size: 210%;
 	}
 	
 	thead th:last-child{
